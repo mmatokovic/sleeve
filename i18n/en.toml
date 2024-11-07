@@ -1,0 +1,38 @@
+[wordCount]
+  other = "{{ .WordCount }} words"
+
+[contact]
+  other = 'Contact us'
+
+[contact_company_information]
+  other = 'Company Information'
+
+[contact_company_hours]
+  other = 'Working hours'
+
+[contact_work_hours]
+  other = 'ponedjeljak - petak od 06 - 22 h'
+
+[contact_saturday]
+  other = 'subota od 06 - 14 h'
+
+[contact_holiday]
+  other = 'nedjeljom, državnim praznicima i blagdanima ne radimo'
+
+[contact_vat]
+  other = 'VAT ID'
+
+[contact_name]
+  other = 'Name'
+
+[contact_email]
+  other = 'Email'
+
+[contact_phone]
+  other = 'Phone'
+
+[contact_message]
+  other = 'Message'
+
+[contact_enquiry]
+  other = 'Send Enquiry'
