@@ -1,0 +1,38 @@
+[wordCount]
+  other = "{{ .WordCount }} riječi"
+
+[contact]
+  other = 'kontaktirajte nas'
+
+[contact_company_information]
+  other = 'Kontakt podaci'
+
+[contact_company_hours]
+  other = 'Radno vrijeme'
+
+[contact_work_hours]
+  other = 'ponedjeljak - petak od 06 - 22 h'
+
+[contact_saturday]
+  other = 'subota od 06 - 14 h'
+
+[contact_holiday]
+  other = 'nedjeljom, državnim praznicima i blagdanima ne radimo'
+
+[contact_vat]
+  other = 'OIB'
+
+[contact_name]
+  other = 'Ime'
+
+[contact_email]
+  other = 'E-mail adresa'
+
+[contact_phone]
+  other = 'Broj telefona'
+
+[contact_message]
+  other = 'Vaša poruka'
+
+[contact_enquiry]
+  other = 'POŠALJI'

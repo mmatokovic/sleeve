@@ -1,0 +1,11 @@
+{
+  "name": "sleeve",
+  "version": "1.0.0",
+  "description": "My personal Hugo theme.",
+  "author": "Mislav Matoković <mislav.mat@hotmail.com>",
+  "repository": "github:mmatokovic/sleeve",
+  "devDependencies": {
+    "@tailwindcss/cli": "4.0.0-alpha.31",
+    "tailwindcss": "4.0.0-alpha.31"
+  }
+}
