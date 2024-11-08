@@ -2,7 +2,6 @@
 
 `Sleeve` is a minimalist and responsive theme for [Hugo](https://gohugo.io/), designed to create fast, clean, and aesthetically pleasing websites. Whether you're building a personal blog, a portfolio, or a simple project site, Sleeve offers the flexibility and features you need.
 
-
 ## Features
 
 - **Minimal Design**: Focus on content with a clean layout.
@@ -19,13 +18,20 @@ To install Sleeve as your default theme, first install this repository in the th
 git clone https://github.com/mmatokovic/sleeve.git themes/sleeve
 ```
 
-To change a theme via the Hugo CLI, you can pass the -t flag when building your site:
+Include the dependencies defined in package.hugo.json from modules and themes
 
 ```bash
-hugo -t sleeve
+hugo mod npm pack
 ```
 
-If you’ve already decided on the theme for your site and do not want to fiddle with the command line, you can add the theme directly to your site configuration file `hugo.toml`:
+Then install or update the all required dependencies.
+
+```bash
+npm install
+npm update
+```
+
+Add the theme directly to your site configuration file `hugo.toml`:
 
 ```bash
 theme: sleeve
