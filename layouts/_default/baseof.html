@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
 <head>
-  {{ partial "head.html" . }}
+  {{ partial "head" . }}
 </head>
 <body>
   <header>
-    {{ partial "header.html" . }}
+    {{ partial "header" . }}
   </header>
-  <main>
-    {{ block "main" . }}{{ end }}
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[220px_1fr] lg:gap-8">
+      <div>
+        <strong class="uppercase font-medium text-gray-900"> Quick Links </strong>
+        {{ partial "menu" (dict "menuID" "main" "page" .) }}
+      </div>
+      <div>
+        {{ block "main" . }}{{ end }}
+      </div>
+    </div>
   </main>
   <footer>
-    {{ partial "footer.html" . }}
+    {{ partial "footer" . }}
   </footer>
 </body>
 </html>

@@ -1,10 +1,21 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-
+<div>
+  {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
   {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
   {{ $dateHuman := .Date | time.Format ":date_long" }}
   <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-
-  {{ .Content }}
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+    <div class="lg:col-span-2">
+      <article class="prose lg:prose-xl text-pretty">
+        {{ .Content }}
+      </article>
+    </div>
+    <div class="relative">
+      <aside class="sticky top-4">
+        <strong class="uppercase font-medium text-gray-900"> ON THIS PAGE </strong>
+        {{ .TableOfContents }}
+      </aside>
+    </div>
+  </div>
+</div>
 {{ end }}

@@ -16,7 +16,8 @@
 {{ partial "head/site_schema.html" . }}
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}
+{{ partialCached "jslibs/alpinejs/script-src.html" "-" }}
+{{ partialCached "jslibs/turbo/script-src.html" "-" }}
 {{- with .OutputFormats.Get "rss" -}}
 {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
 {{- end }}
-<link rel="preload" href="fonts/Helvetica.woff" as="font" type="font/woff2" crossorigin>
