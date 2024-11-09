@@ -33,8 +33,16 @@ npm update
 
 Add the theme directly to your site configuration file `hugo.toml`:
 
-```bash
+```toml
 theme: sleeve
+```
+
+## Updating
+
+From the root of your site:
+
+```bash
+git submodule update --remote --merge
 ```
 
 ## License

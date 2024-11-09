@@ -1,0 +1,6 @@
+<!--As defined in hugo.toml under [[module.mounts]]!-->
+{{ $alpine := resources.Get "js/lib/alpinejs/cdn.min.js" }}
+{{ $jsTurbolinksAdapter := resources.Get "js/lib/alpinejs-turbolinks/alpine-turbo-drive-adapter.js" -}}
+{{- $js := slice $jsTurbolinksAdapter $alpine | resources.Concat "js/lib/alpinejs/alpine.js" | minify | fingerprint -}}
+
+<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

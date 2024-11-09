@@ -1,0 +1,17 @@
+{{ $strAnchor := urlize .Anchor }}
+{{ $replacedAnchor := replaceRE "%25" "" $strAnchor }}
+
+{{ if or (eq .Level 1) (eq .Level 3) }}
+    <h3>{{ .Text | safeHTML }}</h3>
+{{ else }}
+    <h{{ .Level }} class="relative group">{{ .Text | safeHTML }}
+        <div id="{{ .Anchor | safeURL | urlize }}" class="anchor"></div>
+        {{ if.Page.Params.showHeadingAnchors | default (.Page.Site.Params.article.showHeadingAnchors | default true) }}
+        <span
+            class="absolute top-0 w-6 transition-opacity opacity-0 -left-6 not-prose group-hover:opacity-100">
+            <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+                style="text-decoration-line: none !important;" href="#{{ $replacedAnchor | safeURL }}" aria-label="Anchor">#</a>
+        </span>
+        {{ end }}
+    </h{{ .Level }}>
+{{ end }}
