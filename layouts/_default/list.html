@@ -1,8 +1,13 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ .Summary }}
-  {{ end }}
+<main>
+  <article>
+    <div class="prose lg:prose-xl max-w-none text-pretty">
+      {{- .Content -}}
+    </div>
+    {{ partial "posts-template" . }}
+  </article>
+  <div class=" my-16">
+    {{ partial "pagination" . }}
+  </div>
+</main>
 {{ end }}

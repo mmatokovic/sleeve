@@ -45,6 +45,16 @@ From the root of your site:
 git submodule update --remote --merge
 ```
 
+## Uses
+
+When you wanna create a new content, Hugo evaluates the template actions within the archetype. For example:
+
+```bash
+hugo new content posts/my-first-post.md
+```
+
+Use the --kind command line flag to specify an alternate archetype when creating content: `hugo new content --kind tutorials articles/something.md`
+
 ## License
 
 [MIT license](LICENSE) © Mislav Matoković

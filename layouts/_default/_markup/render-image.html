@@ -1,0 +1,15 @@
+{{- if .IsBlock -}}
+  <figure>
+    <img src="{{ .Destination | safeURL }}" class="rounded-xl"
+      {{- with .Text }} alt="{{ . }}"{{ end -}}
+    >
+    {{- with .Title }}<figcaption class="text-center">
+      <small>{{ . }}</small>
+    </figcaption>{{ end -}}
+  </figure>
+{{- else -}}
+  <img src="{{ .Destination | safeURL }}" class="w-full rounded-xl"
+    {{- with .Text }} alt="{{ . }}"{{ end -}}
+    {{- with .Title }} title="{{ . }}"{{ end -}}
+  >
+{{- end -}}

@@ -1,0 +1,47 @@
+<div class="mt-8 [column-fill:_balance] sm:columns-2 sm:gap-6 lg:columns-3 lg:gap-8">
+  {{ range .Paginator.Pages }}
+  <div class="mb-8 sm:break-inside-avoid">
+    <div class="rounded-lg bg-slate-50 shadow-sm">
+      <div class="flex items-center gap-4 group">
+        <a href="{{ .RelPermalink }}">
+          <article class="group">
+            {{ with partial "jslibs/gallery/get-gallery.html" . }}
+            <img
+              src="{{ .thumb.RelPermalink }}"
+              alt="{{ .thumb.Name }}"
+              width="{{ .thumb.Width }}"
+              height="{{ .thumb.Height }}"
+              class="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
+            />
+            {{ end }}
+            <div class="p-4">
+                <h3 class="text-lg font-medium text-gray-900">{{ .LinkTitle }}</h3>
+                <dl class="flex gap-4 sm:gap-6">
+                  <div class="flex flex-col-reverse">
+                    <dd class="text-xs text-gray-500">{{.Date.Format "01.02.2006."}}</dd>
+                  </div>
+                  <div class="flex flex-col-reverse">
+                    <dd class="text-xs text-gray-500">Reading time: {{ .ReadingTime }} minute</dd>
+                  </div>
+                </dl>
+                {{ with .GetTerms "tags" }}
+                <div class="mt-1 flex flex-wrap gap-1">
+                {{ range $elem_index, $elem_val := . }}
+                {{- if gt $elem_index 0 }}, {{ end -}}
+                <span class="whitespace-nowrap rounded-full bg-gray-200 px-2.5 py-0.5 text-xs text-gray-600">
+                  {{ .LinkTitle }}
+                </span>
+                {{- end -}}
+                {{ end }}
+              </div>            
+              <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                {{ .Content | strings.Truncate 142 }}
+              </p>
+            </div>
+          </article>
+        </a>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+</div>

@@ -21,3 +21,9 @@
     overflow: hidden;
   }
 }
+
+@layer components {
+  #TableOfContents ul > li > ul {
+    @apply space-y-1 border-l border-gray-200 pl-4;
+  }
+}

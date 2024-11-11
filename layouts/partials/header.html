@@ -1,30 +1,32 @@
-<div class="mx-auto max-w-7xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
+<div class="mx-auto max-w-7xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8 h-56">
 	<div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
 		<div>
 			<h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">{{ if not .IsHome }}{{ .Title }}{{ else }}{{ T "header" }}{{ end }}</h1>
-			{{if not .IsHome}}
-				{{ partial "breadcrumbs" . }}
-			{{else}}
-			<h4 class="text-sm font-bold text-gray-900 sm:text-xl mt-4">I'm Mislav Matoković, and I like to write when I have free time.</h4>
-			<p class="mt-1.5 text-sm text-gray-500">
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure, recusandae.
-			</p>
-			{{end}}
 		</div>
 		<div class="flex items-center gap-4">
+			{{ partial "utils/icon.html" (dict "name" "linkedin" "attributes" "height=24") }}
 			{{ partial "utils/icon.html" (dict "name" "github" "attributes" "height=24") }}
 			{{ if hugo.IsMultilingual }}
-				{{ partial "utils/icon.html" (dict "name" "language" "attributes" "height=24") }}
 				{{ range .Site.Languages }}
 					{{ if eq . $.Site.Language }}
-						<a href="#" class="hidden capitalize">{{ .LanguageName  }}</a>
+					<a href="#" class="hidden capitalize">
+						{{ .LanguageName  }}
+					</a>
 					{{ else }}
-						{{ range $.Translations }}
-							<a href="{{ .Permalink }}" class="py-2.5 text-sm capitalize underline">{{ .Language.LanguageName }}</a>
-						{{ end }}
+					{{ range $.Translations }}
+						<a href="{{ .Permalink }}" class="py-2.5 text-sm capitalize underline">{{ partial "utils/icon.html" (dict "name" "language" "attributes" "height=24") }}</a>
+					{{ end }}
 					{{ end }}
 				{{ end }}
 			{{ end }}
 		</div>
 	</div>
+	{{if not .IsHome}}
+		{{ partial "breadcrumbs" . }}
+	{{else}}
+	<h4 class="text-sm font-bold text-gray-900 sm:text-xl mt-3.5">I'm Mislav Matoković, and I like to write when I have free time.</h4>
+	<p class="mt-1 text-sm text-gray-500">
+		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure, recusandae.
+	</p>
+	{{end}}
 </div>
