@@ -33,7 +33,7 @@ npm update
 
 Add the theme directly to your site configuration file `hugo.toml`:
 
-```toml
+```json
 theme: sleeve
 ```
 
