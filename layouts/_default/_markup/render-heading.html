@@ -1,7 +1,7 @@
 {{ $strAnchor := urlize .Anchor }}
 {{ $replacedAnchor := replaceRE "%25" "" $strAnchor }}
 
-{{ if or (eq .Level 1) (eq .Level 3) }}
+{{ if or (eq .Level 1) }}
     <h3>{{ .Text | safeHTML }}</h3>
 {{ else }}
     <h{{ .Level }} class="relative group">{{ .Text | safeHTML }}

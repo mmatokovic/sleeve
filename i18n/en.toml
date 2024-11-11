@@ -3,3 +3,9 @@
 
 [header]
   other = 'Hello, there!'
+
+[contact_submitted]
+  other = "Your message was sent."
+
+[contact_error]
+  other = "There was an error sending the message."

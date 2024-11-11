@@ -1,5 +1,5 @@
 <!--As defined in hugo.toml under [[module.mounts]]!-->
-{{ $turbo := resources.Get "js/lib/turbo/turbo.es2017-esm.js" }}
+{{ $turbo := resources.Get "js/libs/turbo/turbo.es2017-esm.js" }}
 {{- $js := $turbo | minify | fingerprint -}}
 
 <script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

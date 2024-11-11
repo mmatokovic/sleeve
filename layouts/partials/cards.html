@@ -1,6 +1,6 @@
 <div>
 {{- $paginator := .Paginate ( where site.RegularPages "Type" "posts") 3 }}
-{{- range $paginator.Pages }}
+{{- range $paginator.Pages.ByDate }}
 <article class="mb-3 flex relative h-48 overflow-hidden sm:h-48 lg:order-last lg:h-48">
   <div class="hidden sm:block sm:basis-56">
     <img
@@ -13,12 +13,12 @@
     <div class="border-s border-gray-900/10 p-1 sm:border-l-transparent sm:p-2">
       {{- range $elem_index, $elem_val := (.GetTerms "tags") }}
       {{- if gt $elem_index 0 }} {{ end -}}
-      <a href="{{ .Permalink }}" 
+      <a href="{{ .Permalink }}"
         class="uppercase inline-flex items-center rounded-md bg-gray-300 hover:text-black px-2.5 py-0.5 text-sm font-thin text-gray-700 ">
         {{ .LinkTitle }}
       </a>
       {{- end }}
-      <a href="{{ .Permalink }}">
+      <a href="{{ .Permalink }}" data-turbo="false" >
         <h3 class="font-medium uppercase text-gray-900 border-b-2 pt-6 border-gray-100">
           {{ .Title }}
         </h3>
@@ -27,7 +27,7 @@
         {{ .Content | strings.Truncate 142 }}
       </p>
       {{ if .Truncated }}
-      <a href="{{ .Permalink }}" class="text-center text-xs font-bold uppercase text-gray-900 transition">
+      <a href="{{ .Permalink }}" class="text-center text-xs font-bold uppercase text-gray-700 transition">
         Read More
       </a>
       {{ end }}

@@ -12,7 +12,7 @@ Renders a menu for the given menu ID.
 
 {{- with index site.Menus $menuID }}
   <nav>
-    <ul class=" uppercase py-3 space-y-1 border-t-2 border-gray-100">
+    <ul class="uppercase py-3 space-y-1 border-t-2 border-gray-100">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
   </nav>

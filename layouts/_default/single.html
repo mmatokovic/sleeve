@@ -2,16 +2,29 @@
 <div>
   {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
   {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-  {{ $dateHuman := .Date | time.Format ":date_long" }}
-  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  {{ $dateHuman := .Date | time.Format "02.01.2006." }}
+  <small class="text-xs text-gray-500">
+    <time datetime="{{ $dateMachine }}">Posted on {{ $dateHuman }} • Updated on {{ .Lastmod.Format "02.01.2006."}}</time>
+  </small>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
     <div class="lg:col-span-2">
-      <article class="prose lg:prose-xl text-pretty">
+      <article class="prose lg:prose-xl max-w-none prose-img:mx-auto text-pretty">
         {{ .Content }}
       </article>
     </div>
     <div class="relative">
       <aside class="sticky top-4">
+        <div class="flex items-center gap-4 mb-2">
+          <a href="">
+            {{ partial "utils/icon.html" (dict "name" "share" "attributes" "height=24") }}
+          </a>
+          <a href="">
+            {{ partial "utils/icon.html" (dict "name" "send" "attributes" "height=24") }}
+          </a>
+          <a href="">
+            {{ partial "utils/icon.html" (dict "name" "copy" "attributes" "height=24") }}
+          </a>
+        </div>
         <strong class="uppercase font-medium text-gray-900"> ON THIS PAGE </strong>
         {{ .TableOfContents }}
       </aside>
