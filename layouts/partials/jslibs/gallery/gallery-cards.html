@@ -1,5 +1,5 @@
 <div class="galleries">
-  {{ with partial "jslibs/gallery/get-gallery.html" . }}
+  {{ with partial "jslibs/gallery/get-gallery" . }}
     <div class="card">
       <a data-turbo="false" class="card-img" href="{{ .page.RelPermalink }}">
         <img

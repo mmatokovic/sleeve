@@ -1,8 +1,8 @@
 {{ define "head-custom" }}
-  {{ partial "jslibs/gallery/head.html" . }}
+  {{ partial "jslibs/gallery/head" . }}
 {{ end }}
-{{ with partial "jslibs/gallery/get-gallery.html" . }}
-  {{ $gallery := partial "jslibs/gallery/init.html" (dict "images" .images) }}
+{{ with partial "jslibs/gallery/get-gallery" . }}
+  {{ $gallery := partial "jslibs/gallery/init" (dict "images" .images) }}
   {{ $params := site.Params.gallerydeluxe }}
   <div id="gallerydeluxe" data-gd-image-data-url="{{ $gallery.imageDataUrl }}">
     <div id="gd-modal" class="gd-modal">

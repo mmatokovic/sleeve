@@ -25,32 +25,13 @@
               </h1>
             </div>
             <span class="hidden h-px md:block flex-1 bg-gradient-to-l from-gray-500 to-transparent opacity-75"></span>
-            <button x-data @click.window="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-6 font-bold cursor-pointer">Return to top</button>
+            <button x-data @click.window="window.scrollTo({top: 0, behavior: 'smooth'})" class="hidden md:block px-6 font-bold cursor-pointer">Return to top</button>
           </div>
         </div>
       </header>
-      <div class="px-4 grid gap-4 mx-auto mt-6 mb-4 lg:max-w-none md:grid-cols-3">
-        {{ range .Pages.ByDate }}
-          <div class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-            <a href="{{.Permalink}}" class="block group">
-              {{ with .Params.featured_image }}
-              {{ with resources.Get . }}
-              {{ $postimage := (.Resize "500x webp q90").RelPermalink }}
-              <img src="{{ $postimage }}" class="h-56 w-full object-cover"
-              loading="lazy" alt="{{ .Title }}" />
-              {{ end }}
-              {{ end }}
-              <div class="p-4 sm:p-6">
-                <time datetime="2020-02-12" class="block text-xs text-gray-500"> {{.Date.Format "2006-01-02"}} </time>
-                <strong class="mt-0.5 text-lg text-gray-900">{{.Title}}</strong>
-                <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
-                  {{ .Params.summary }}
-                </p>
-              </div>
-            </a>
-          </div>
-          {{ end }}
-      </div>
+      <section>
+        {{ partial "tags-cards" . }}
+      </section>
       {{ end }}
     </div>
   </div>

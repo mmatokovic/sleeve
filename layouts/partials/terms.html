@@ -11,11 +11,17 @@ For a given taxonomy, renders a list of terms assigned to the page.
 {{- $taxonomy := .taxonomy }}
 
 {{- with $page.GetTerms $taxonomy }}
-  {{- $label := (index . 0).Parent.LinkTitle }}
+  {{- if eq $taxonomy "series" }}
+  <p class="text-xs text-gray-500">
+    Series: <a href="{{ (index . 0).RelPermalink }}" class="underline hover:text-gray-600">{{ (index . 0).LinkTitle }}</a>
+  </p>
+  {{- else }}
     <p>
+      {{- $label := (index . 0).Parent.LinkTitle }}
       {{- range . }}
         <a class="whitespace-nowrap rounded-full bg-gray-200 px-2.5 py-0.5 text-xs text-gray-600"
           href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       {{- end }}
     </p>
+  {{- end }}
 {{- end }}

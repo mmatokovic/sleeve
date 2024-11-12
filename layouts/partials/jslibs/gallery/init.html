@@ -25,7 +25,7 @@
 {{ $params := site.Params.gallerydeluxe }}
 {{ with $images }}
   {{ range . }}
-    {{ $thumbs := partial "jslibs/gallery/create-thumbs.html" . }}
+    {{ $thumbs := partial "jslibs/gallery/create-thumbs" . }}
     {{ $full := $thumbs.full }}
     {{ $20 := (index $thumbs "20") }}
     {{ $colors := slice }}

@@ -1,0 +1,5 @@
+{{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+{{ $dateHuman := .Date | time.Format "02.01.2006." }}
+<small class="text-xs text-gray-500">
+  <time datetime="{{ $dateMachine }}">Posted on {{ $dateHuman }} • Updated on {{ .Lastmod.Format "02.01.2006."}}</time>
+</small>

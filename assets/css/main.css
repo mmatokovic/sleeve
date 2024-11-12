@@ -23,7 +23,8 @@
 }
 
 @layer components {
-  #TableOfContents ul > li > ul {
+  #TableOfContents ul > li > ul,
+  #menu ul > li > ul {
     @apply space-y-1 border-l border-gray-200 pl-4;
   }
 }

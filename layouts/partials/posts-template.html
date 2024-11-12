@@ -5,7 +5,7 @@
       <div class="flex items-center gap-4 group">
         <a href="{{ .RelPermalink }}">
           <article class="group">
-            {{ with partial "jslibs/gallery/get-gallery.html" . }}
+            {{ with partial "jslibs/gallery/get-gallery" . }}
             <img
               src="{{ .thumb.RelPermalink }}"
               alt="{{ .thumb.Name }}"
@@ -24,19 +24,6 @@
                     <dd class="text-xs text-gray-500">Reading time: {{ .ReadingTime }} minute</dd>
                   </div>
                 </dl>
-                {{ with .GetTerms "tags" }}
-                <div class="mt-1 flex flex-wrap gap-1">
-                {{ range $elem_index, $elem_val := . }}
-                {{- if gt $elem_index 0 }}, {{ end -}}
-                <span class="whitespace-nowrap rounded-full bg-gray-200 px-2.5 py-0.5 text-xs text-gray-600">
-                  {{ .LinkTitle }}
-                </span>
-                {{- end -}}
-                {{ end }}
-              </div>            
-              <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
-                {{ .Content | strings.Truncate 142 }}
-              </p>
             </div>
           </article>
         </a>

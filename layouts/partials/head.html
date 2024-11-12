@@ -13,12 +13,11 @@
   {{ template "_internal/google_analytics.html" . }}
 {{ end }}
 <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
-{{ partial "head/site_schema.html" . }}
-{{ partialCached "head/css.html" . }}
-{{ partialCached "head/js.html" . }}
-{{ partialCached "jslibs/alpinejs/script-src.html" "-" }}
-{{ partialCached "jslibs/turbo/script-src.html" "-" }}
-{{ partialCached "jslibs/gallery/script-src.html" "-" }}
+{{ partial "head/site_schema" . }}
+{{ partialCached "head/css" . }}
+{{ partial "head/js" . }}
+{{ partialCached "jslibs/alpinejs/script-src" "-" }}
+{{ partialCached "jslibs/turbo/script-src" "-" }}
 {{- with .OutputFormats.Get "rss" -}}
 {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
 {{- end }}
