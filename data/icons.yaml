@@ -1,9 +1,13 @@
 # SVG icons
 #
 # https://v1.heroicons.com/
+# https://lucide.dev/icons
 # Example usage in templates using the icon.html partial:
 #
-# {{ partial "utils/icon.html" (dict "name" "github" "attributes" "height=24") }}
+# {{ partial "utils/icon" (dict "name" "github" "attributes" "height=24") }}
+
+rss: >
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
 
 github: >
   <svg fill="currentColor" viewBox="3 3 18 18">
@@ -30,7 +34,7 @@ language: >
   </svg>
 
 external-link: >
-  <svg class="inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="13" height="13" fill="none" stroke="#888888" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.38%">
+  <svg class="inline-block no-underline align-middle ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="13" height="13" fill="none" stroke="#888888" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.38%">
     <path d="M14 9 L3 9 3 29 23 29 23 18 M18 4 L28 4 28 14 M28 4 L14 18"/>
   </svg>
 

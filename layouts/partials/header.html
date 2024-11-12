@@ -4,8 +4,15 @@
 			<h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">{{ if not .IsHome }}{{ .Title }}{{ else }}{{ T "header" }}{{ end }}</h1>
 		</div>
 		<div class="flex items-center gap-4">
-			{{ partial "utils/icon.html" (dict "name" "linkedin" "attributes" "height=24") }}
-			{{ partial "utils/icon.html" (dict "name" "github" "attributes" "height=24") }}
+			<a href="">
+				{{ partial "utils/icon" (dict "name" "rss" "attributes" "height=24") }}
+			</a>
+			<a href="">
+				{{ partial "utils/icon" (dict "name" "linkedin" "attributes" "height=24") }}
+			</a>
+			<a href="">
+				{{ partial "utils/icon" (dict "name" "github" "attributes" "height=24") }}
+			</a>
 			{{ if hugo.IsMultilingual }}
 				{{ range .Site.Languages }}
 					{{ if eq . $.Site.Language }}
@@ -14,7 +21,7 @@
 					</a>
 					{{ else }}
 					{{ range $.Translations }}
-						<a href="{{ .Permalink }}" class="py-2.5 text-sm capitalize underline">{{ partial "utils/icon.html" (dict "name" "language" "attributes" "height=24") }}</a>
+						<a href="{{ .Permalink }}" class="py-2.5 text-sm capitalize underline" title="{{ .Language.LanguageName }}">{{ partial "utils/icon" (dict "name" "language" "attributes" "height=24") }}</a>
 					{{ end }}
 					{{ end }}
 				{{ end }}

@@ -7,6 +7,7 @@
     {{- with $url.Fragment }}{{ $fragment = printf "#%s" . }}{{ end -}}
     {{- with .Page.GetPage $url.Path }}{{ $link = printf "%s%s" .RelPermalink $fragment }}{{ else }}{{ warnf "%q not found from %q" $url.Path $.Page.Path }}{{ end }}{{ end -}}
 {{- end -}}
-<a href="{{ $link | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if $isRemote }} target="_blank"{{ end }} class="underline text-blue-600 hover:text-blue-400">
-    {{ .Text | safeHTML }}{{ if $isRemote }}{{ partial "utils/icon.html" (dict "name" "external-link" "attributes" "height=24") }}{{ end }}
+<a href="{{ $link | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if $isRemote }} target="_blank"{{ end }} class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
+    {{ .Text | safeHTML }}
+    {{ if $isRemote }}{{ partial "utils/icon" (dict "name" "external-link" "attributes" "height=24") }}{{ end }}
 </a>

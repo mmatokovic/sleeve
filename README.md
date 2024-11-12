@@ -45,6 +45,30 @@ From the root of your site:
 git submodule update --remote --merge
 ```
 
+## Configuration
+
+Configurations parameters for the sites config file. All the "params" are optional.
+
+```toml
+baseURL = 'https://example.org/'
+title = 'SiteTitle'
+theme = "sleeve"
+languageCode = 'hr'                     # Set your language code (only needed for none multilingual 
+
+[params]
+  description = ''                      # Set site description, used in meta tags and JSON-LD
+  icon = ''                             # Relative path to icon in json feed and JSON-LD, no leading 
+  alpine = true                         # Add AlpineJS, default false.
+  [params.author]
+    name = 'example'                    # Your Name
+    email = 'example@mail.com'          # Your Email
+  [params.gallery]
+    shuffle     = false
+    reverse     = true
+    enable_exif = false
+```
+At a minimum you need to set the first four, title, description, image and category name. Read more in the podcast section below.
+
 ## Uses
 
 When you wanna create a new content, Hugo evaluates the template actions within the archetype. For example:
