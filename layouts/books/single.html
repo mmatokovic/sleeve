@@ -1,26 +1,32 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-
-  {{ with .Resources.GetMatch "cover.*" }}
-    <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ .Params.alt }}">
-  {{ end }}
-
-  <p>Author: {{ .Params.author }}</p>
-
-  <p>
-    ISBN: {{ .Params.isbn }}<br>
-    Rating: {{ .Params.rating }}<br>
-    Review date: {{ .Date | time.Format ":date_long" }}
-  </p>
-
-  {{ with .GetTerms "tags" }}
-    <p>Tags:</p>
-    <ul>
-      {{ range . }}
-        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-      {{ end }}
-    </ul>
-  {{ end }}
-
-  {{ .Content }}
+  <div class="flex items-stretch gap-4">
+    {{ with .Resources.GetMatch "cover.*" }}
+    <img
+      src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ .Params.alt }}"
+      class="rounded-lg object-cover"
+    />
+    {{ end }}
+    <div>
+      <h3 class="text-lg/tight font-medium text-gray-900">{{ .Title }}</h3>
+      <p>Author: {{ .Params.author }}</p>
+      <p class="mt-0.5 text-gray-700">
+        ISBN: {{ .Params.isbn }}<br>
+        Rating: {{ .Params.rating }}<br>
+        Review date: {{ .Date | time.Format ":date_long" }}
+      </p>
+      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+      {{- $taxonomyObject := .Site.Taxonomies.genres }}
+      {{- with $taxonomyObject }}
+      <p>Genres:</p>
+      <ul>
+        {{- range $term, $weightedPages := $taxonomyObject }}
+          <li><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a></li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </div>
+  </div>
+  <article class="prose lg:prose-xl max-w-none prose-img:mx-auto text-pretty">
+    {{ .Content }}
+  </article>
 {{ end }}

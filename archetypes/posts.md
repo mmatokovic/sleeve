@@ -2,7 +2,7 @@
 title = '{{ replace .File.ContentBaseName `-` ` ` | title }}s'
 date = {{ .Date }}
 draft = true
-categories = ['Technology', 'Lifestyle', 'Education', 'Travel', 'Finance', History]
+categories = ['Technology', 'Lifestyle', 'Education', 'Travel', 'Finance', historical]
 tags = ['Trance', 'Tag B']
 series = ''
 +++

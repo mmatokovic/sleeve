@@ -20,11 +20,27 @@
   body.overflow {
     overflow: hidden;
   }
+  [x-cloak] { display: none !important; }
 }
 
 @layer components {
-  #TableOfContents ul > li > ul,
-  #menu ul > li > ul {
-    @apply space-y-1 border-l border-gray-200 pl-4;
+  #TableOfContents {
+    @apply py-8;
+  
+    ul > li > ul {
+      @apply space-y-1 border-l border-gray-200 pl-4;
+    }
+  
+    a {
+      @apply text-gray-500 hover:text-gray-700;
+    }
+  }
+  
+  .tocactive {
+    @apply font-medium text-gray-700;
+  }
+
+  .active {
+    @apply text-gray-700 bg-gray-100;
   }
 }

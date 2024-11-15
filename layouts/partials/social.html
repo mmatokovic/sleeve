@@ -1,0 +1,41 @@
+<ul class="flex items-center gap-4">
+  <li>
+    <a href="#" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
+      <span class="sr-only">x</span>
+      {{ partial "utils/icon" (dict "name" "x" "attributes" "height=20 class=fill-black") }}
+    </a>
+  </li>
+  <li>
+    <a href="#" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
+      <span class="sr-only">linkedin</span>
+      {{ partial "utils/icon" (dict "name" "linkedin" "attributes" "height=24") }}
+    </a>
+  </li>
+  <li>
+    <a href="#" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
+      <span class="sr-only">github</span>
+      {{ partial "utils/icon" (dict "name" "github" "attributes" "height=24") }}
+    </a>
+  </li>
+  <li>
+    <a href="#" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
+      <span class="sr-only">rss</span>
+      {{ partial "utils/icon" (dict "name" "rss" "attributes" "height=24") }}
+    </a>
+  </li>
+  <li>
+    {{- if hugo.IsMultilingual }}
+      {{- range .Site.Languages }}
+        {{- if eq . $.Site.Language }}
+        <a href="#" class="hidden capitalize">
+          {{ .LanguageName  }}
+        </a>
+        {{- else }}
+        {{- range $.Translations }}
+          <a href="{{ .Permalink }}" class="py-2.5 text-sm capitalize underline" title="{{ .Language.LanguageName }}">{{ partial "utils/icon" (dict "name" "language" "attributes" "height=24") }}</a>
+        {{- end }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  </li>
+</ul>

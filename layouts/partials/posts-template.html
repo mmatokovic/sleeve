@@ -21,7 +21,8 @@
                     <dd class="text-xs text-gray-500">{{.Date.Format "01.02.2006."}}</dd>
                   </div>
                   <div class="flex flex-col-reverse">
-                    <dd class="text-xs text-gray-500">Reading time: {{ .ReadingTime }} minute</dd>
+                    <dd class="text-xs text-gray-500">
+                      {{ partial "utils/icon" (dict "name" "book-open" "attributes" "height=14 class=inline") }} {{ .ReadingTime }} min.</dd>
                   </div>
                 </dl>
             </div>

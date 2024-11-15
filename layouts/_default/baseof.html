@@ -9,11 +9,8 @@
   </header>
   <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="relative mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[220px_1fr] lg:gap-8">
-      <div class="relative">
-        <div class="sticky top-4">
-          <strong class="uppercase font-medium text-gray-900"> Quick Links </strong>
-          {{ partial "menu" (dict "menuID" "main" "page" .) }}
-        </div>
+      <div class="flex flex-col justify-between bg-white">
+        {{ partial "menu" (dict "menuID" "main" "page" .) }}
       </div>
       <div>
         {{ block "main" . }}{{ end }}

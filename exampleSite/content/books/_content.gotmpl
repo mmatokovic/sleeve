@@ -1,14 +1,14 @@
-{{/* Get data. */}}
+{{/* Get remote data. */}}
 {{ $data := dict }}
-{{ $path := "data/books.json" }}
-{{ with resources.Get $path }}
+{{ $url := "https://gohugo.io/shared/examples/data/books.json" }}
+{{ with resources.GetRemote $url }}
   {{ with .Err }}
-    {{ errorf "Unable to get resource %s: %s" $path . }}
+    {{ errorf "Unable to get remote resource %s: %s" $url . }}
   {{ else }}
     {{ $data = . | transform.Unmarshal }}
   {{ end }}
 {{ else }}
-  {{ errorf "Unable to get resource %s" $path }}
+  {{ errorf "Unable to get remote resource %s" $url }}
 {{ end }}
 
 {{/* Add pages and page resources. */}}
@@ -30,10 +30,10 @@
 
   {{/* Add page resource. */}}
   {{ $item := . }}
-  {{ with $path := $item.cover }}
-    {{ with resources.Get $path }}
+  {{ with $url := $item.cover }}
+    {{ with resources.GetRemote $url }}
       {{ with .Err }}
-        {{ errorf "Unable to get resource %s: %s" $path . }}
+        {{ errorf "Unable to get remote resource %s: %s" $url . }}
       {{ else }}
         {{ $content := dict "mediaType" .MediaType.Type "value" .Content }}
         {{ $params := dict "alt" $item.title }}
@@ -45,7 +45,7 @@
         {{ $.AddResource $resource }}
       {{ end }}
     {{ else }}
-      {{ errorf "Unable to get resource %s" $path }}
+      {{ errorf "Unable to get remote resource %s" $url }}
     {{ end }}
   {{ end }}
 
