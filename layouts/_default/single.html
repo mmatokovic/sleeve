@@ -23,7 +23,7 @@
             {{ partial "utils/icon" (dict "name" "copy" "attributes" "height=24") }}
           </a>
         </div>
-        <strong class="uppercase font-medium text-gray-900"> ON THIS PAGE </strong>
+        <strong class="uppercase font-medium text-gray-900" x-data="{ visibleHeadingId: '' }"> ON THIS PAGE </strong>
         {{ .TableOfContents }}
       </aside>
     </div>

@@ -1,5 +1,9 @@
-<!--As defined in hugo.toml under [[module.mounts]]!-->
-{{ $turbo := resources.Get "js/libs/turbo/turbo.es2017-esm.js" }}
-{{- $js := $turbo | minify | fingerprint -}}
+{{- $opts := dict "minify" true }}
+{{- if eq hugo.Environment "development" }}
+  {{- $opts = merge $opts (dict "minify" false) }}
+{{- end }}
 
-<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{- if site.Params.turbo }}
+{{- $turbo := resources.Get "js/libs/turbo/turbo.es2017-esm.js" | js.Build $opts | fingerprint }}
+<script type="module" src="{{ $turbo.RelPermalink }}" integrity="{{ $turbo.Data.Integrity }}"></script>
+{{- end }}
