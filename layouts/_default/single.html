@@ -13,18 +13,14 @@
     <div class="relative">
       <aside class="sticky top-4">
         <div class="flex items-center gap-4 mb-2">
-          <a href="">
-            {{ partial "utils/icon" (dict "name" "share" "attributes" "height=24") }}
-          </a>
-          <a href="">
+          <a href="mailto:?subject={{ .Site.Title }}: {{ .Title }} &amp;body=Check out this latest article from {{ .Site.Title }}: {{ .Permalink }}">
             {{ partial "utils/icon" (dict "name" "send" "attributes" "height=24") }}
           </a>
-          <a href="">
-            {{ partial "utils/icon" (dict "name" "copy" "attributes" "height=24") }}
-          </a>
         </div>
-        <strong class="uppercase font-medium text-gray-900" x-data="{ visibleHeadingId: '' }"> ON THIS PAGE </strong>
-        {{ .TableOfContents }}
+        <div class="hidden md:block">
+          <strong class="uppercase font-medium text-gray-900" x-data="{ visibleHeadingId: '' }"> ON THIS PAGE </strong>
+          {{ .TableOfContents }}
+        </div>
       </aside>
     </div>
   </div>

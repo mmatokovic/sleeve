@@ -1,7 +1,7 @@
 <?php
 
 // Set the e-mail address that submission should be sent to e.g. info@example.com.
-$address = 'mislav.mat@hotmail.com';
+$address = 'me@mmatokovic.dev';
 
 // Set the e-mail subject prefix.
 $prefix = 'Website feedback';

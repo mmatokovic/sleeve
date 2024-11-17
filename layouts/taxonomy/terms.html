@@ -21,7 +21,7 @@
               </h1>
             </div>
             <span class="hidden h-px md:block flex-1 bg-gradient-to-l from-gray-500 to-transparent opacity-75"></span>
-            <button x-data @click.window="window.scrollTo({top: 0, behavior: 'smooth'})" class="hidden md:block px-6 font-bold cursor-pointer text-gray-700 transition hover:text-gray-700/75">Return to top</button>
+            <button x-data x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})" class="hidden md:block px-6 font-bold cursor-pointer text-gray-700 transition hover:text-gray-700/75">Return to top</button>
           </div>
         </div>
       </header>

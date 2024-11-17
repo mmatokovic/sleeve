@@ -1,38 +1,39 @@
 <ul class="flex items-center gap-4">
+  {{ $data := dict }}
+  {{ $path := "data/social.yaml" }}
+  {{ with resources.Get $path }}
+    {{ with . | transform.Unmarshal }}
+      {{ $data = . }}
+    {{ end }}
+    {{ range $data }}
+      <li>
+        <a href="{{ .url }}" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
+          <span class="sr-only">{{ .name }}</span>
+          {{ partial "utils/icon" (dict "name" .name "attributes" "height=20") }}
+        </a>
+      </li>
+    {{ end }}
+  {{ end }}
+  {{ with .OutputFormats.Get "rss" -}}
   <li>
-    <a href="#" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
-      <span class="sr-only">x</span>
-      {{ partial "utils/icon" (dict "name" "x" "attributes" "height=20 class=fill-black") }}
-    </a>
-  </li>
-  <li>
-    <a href="#" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
-      <span class="sr-only">linkedin</span>
-      {{ partial "utils/icon" (dict "name" "linkedin" "attributes" "height=24") }}
-    </a>
-  </li>
-  <li>
-    <a href="#" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
-      <span class="sr-only">github</span>
-      {{ partial "utils/icon" (dict "name" "github" "attributes" "height=24") }}
-    </a>
-  </li>
-  <li>
-    <a href="#" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
+    <a href="{{ .Permalink }}" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
       <span class="sr-only">rss</span>
-      {{ partial "utils/icon" (dict "name" "rss" "attributes" "height=24") }}
+      {{ partial "utils/icon" (dict "name" "rss" "attributes" "height=20") }}
     </a>
   </li>
+  {{ end }}
   <li>
     {{- if hugo.IsMultilingual }}
       {{- range .Site.Languages }}
         {{- if eq . $.Site.Language }}
-        <a href="#" class="hidden capitalize">
+        <a href="#" class="hidden capitalize text-gray-700 transition hover:text-gray-700/75">
           {{ .LanguageName  }}
         </a>
         {{- else }}
         {{- range $.Translations }}
-          <a href="{{ .Permalink }}" class="py-2.5 text-sm capitalize underline" title="{{ .Language.LanguageName }}">{{ partial "utils/icon" (dict "name" "language" "attributes" "height=24") }}</a>
+          <a href="{{ .Permalink }}" class="py-2.5 text-sm capitalize underline text-gray-700 transition hover:text-gray-700/75" title="{{ .Language.LanguageName }}">
+            {{ partial "utils/icon" (dict "name" "language" "attributes" "height=24") }}
+          </a>
         {{- end }}
         {{- end }}
       {{- end }}

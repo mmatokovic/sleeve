@@ -1,8 +1,8 @@
 {{ define "main" }}
 <section>
   <strong class="uppercase font-medium text-gray-900 flex justify-end"> Latest Posts </strong>
-{{- $paginator := .Paginate ( where site.RegularPages "Type" "posts") 3 }}
-{{- range $paginator.Pages.ByDate }}
+  {{- $paginator := .Paginate ( where site.RegularPages "Type" "posts") 3 }}
+  {{- range $paginator.Pages.ByDate }}
   <article class="mb-3 flex relative h-48 overflow-hidden sm:h-48 lg:order-last lg:h-48 group">
     <div class="hidden sm:block sm:basis-56">
       {{ with partial "jslibs/gallery/get-gallery" . }}
@@ -15,7 +15,7 @@
       />
       {{ end }}
     </div>
-    <div class="flex flex-1 flex-col justify-between pl-4">
+    <div class="flex flex-1 flex-col justify-between md:pl-4">
       <div class="border-s border-gray-900/10 p-1 sm:border-l-transparent sm:p-2">
         {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
         {{ partial "dates" . }}
@@ -37,34 +37,4 @@
   </article>
 {{- end }}
 </section>
-<section>
-  <strong class="uppercase font-medium text-gray-900 flex justify-end"> Latest projects </strong>
-{{- range where site.RegularPages "Type" "projects" }}
-<article class="border-b-2 border-gray-900/10 bg-white">
-  <div class="flex items-start gap-4 py-6"> 
-    <div>
-      <h3 class="font-medium py-2 sm:text-lg text-gray-900 transition hover:text-gray-900/75">
-        <a href="{{ .Permalink }}" class="hover:underline"> 
-          {{ .Title }} 
-        </a>
-      </h3>
-      <div class="line-clamp-2 text-sm text-gray-500">
-        {{ .Summary }}
-      </div>
-      <div class="mt-2 sm:flex sm:items-center sm:gap-2">
-        <div class="flex items-center gap-1 text-gray-500">
-          <p class="text-xs">{{ partial "dates" . }}</p>
-        </div>
-        <span class="hidden sm:block" aria-hidden="true">&middot;</span>
-        <p class="hidden sm:block sm:text-xs sm:text-gray-500">
-          Posted by
-          <a href="#" class="font-medium underline hover:text-gray-700"> John </a>
-        </p>
-      </div>
-    </div>
-  </div>
-</article>
 {{- end }}
-</section>
-
-{{ end }}

@@ -2,7 +2,7 @@
   "name": "sleeve",
   "version": "1.0.0",
   "description": "My personal Hugo theme.",
-  "author": "Mislav Matoković <mislav.mat@hotmail.com>",
+  "author": "Mislav Matoković <me@mmatokovic.dev>",
   "repository": "github:mmatokovic/sleeve",
   "devDependencies": {
     "alpine-turbo-drive-adapter": "^2.1.0",
