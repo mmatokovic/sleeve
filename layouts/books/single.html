@@ -1,4 +1,5 @@
 {{ define "main" }}
+<section>
   <div class="flex items-stretch gap-4">
     {{ with .Resources.GetMatch "cover.*" }}
     <img
@@ -17,16 +18,17 @@
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
       {{- $taxonomyObject := .Site.Taxonomies.genres }}
       {{- with $taxonomyObject }}
-      <p>Genres:</p>
-      <ul>
+      <p class="text-xs text-gray-500">
+        Genres: 
         {{- range $term, $weightedPages := $taxonomyObject }}
-          <li><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a></li>
+          <a href="{{ .Page.RelPermalink }}" class="font-medium underline hover:text-gray-700">{{ .Page.LinkTitle }}</a>
         {{- end }}
-      </ul>
+      </p>
       {{- end }}
     </div>
   </div>
   <article class="prose lg:prose-xl max-w-none prose-img:mx-auto text-pretty">
     {{ .Content }}
   </article>
+</section>
 {{ end }}

@@ -4,46 +4,46 @@
 
 <nav class="flex items-center justify-center px-4 sm:px-0">
   <div class="flex flex-1 w-0">
-    <div class="mx-auto border-t-2">
+    <div class="mx-auto border-gray-900/10 border-t-1 text-gray-500">
       {{ if and (ne $pag.PageNumber 1) (ne $pag.PageNumber 2) }}
       <a href="{{ $pag.First.URL }}" rel="first"
-          class="inline-flex items-center px-4 pt-4 text-lg font-black">«
+          class="inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700">«
           First</a>
       {{ end }}
 
       {{ if $pag.HasPrev  }}
       <a href="{{ $pag.Prev.URL }}" rel="prev"
-          class="inline-flex items-center px-4 pt-4 text-lg font-black">‹
+          class="inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700">‹
           Prev</a>
       {{ end }}
 
       {{ range $pag.Pagers }}
       {{ if eq . $pag }}
-      <a class="font-black page-item active"><a href="{{ .URL }}"
-              class="inline-flex items-center px-4 pt-4 text-lg font-medium">{{ .PageNumber }}</a>
+      <a class="page-item active hover:text-gray-700"><a href="{{ .URL }}"
+              class="inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700">{{ .PageNumber }}</a>
       </a>
       {{ else if and (ge .PageNumber (sub $pag.PageNumber 2)) (le .PageNumber (add $pag.PageNumber 2)) }}
       {{ $.Scratch.Set "dot_rendered" false }}
       <a class="page-item"><a href="{{ .URL }}"
-              class="inline-flex items-center px-4 pt-4 text-lg font-medium">{{ .PageNumber }}</a>
+              class="inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700">{{ .PageNumber }}</a>
       </a>
       {{ else if eq ($.Scratch.Get "dot_rendered") false }}
       {{ $.Scratch.Set "dot_rendered" true }}
       <a class="page-item disabled"><a
-        class="inline-flex items-center px-4 pt-4 text-lg font-medium">...</a>
+        class="inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700">...</a>
       </a>
       {{ end }}
       {{ end }}
 
       {{ if $pag.HasNext }}
       <a class="page-item"><a href="{{ $pag.Next.URL }}" rel="next"
-        class="inline-flex items-center px-4 pt-4 text-lg font-black">Next
+        class="inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700">Next
         ›</a></a>
       {{ end }}
 
       {{ if and (ne $pag.PageNumber $pag.TotalPages) ((ne $pag.PageNumber (sub $pag.TotalPages 1))) }}
       <a class="page-item"><a href="{{ $pag.Last.URL }}" rel="last"
-        class="inline-flex items-center px-4 pt-4 text-lg font-black">Last
+        class="inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700">Last
         »</a></a>
       {{ end }}
   </div>
