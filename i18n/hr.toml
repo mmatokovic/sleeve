@@ -3,3 +3,6 @@
 
 [header]
   other = 'Pozdrav!'
+
+[related]
+  other = 'Related pages'
