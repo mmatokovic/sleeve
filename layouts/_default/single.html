@@ -1,8 +1,10 @@
 {{ define "main" }}
 <div>
-  {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
-  {{ partial "dates" . }}
-  {{ partial "terms" (dict "taxonomy" "series" "page" .) }}
+  <div class="mb-2.5">
+    {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
+    {{ partial "dates" . }}
+    {{ partial "terms" (dict "taxonomy" "series" "page" .) }}
+  </div>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
     <div class="lg:col-span-2">
       <article class="prose lg:prose-xl max-w-none prose-img:mx-auto text-pretty">
