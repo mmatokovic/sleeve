@@ -26,7 +26,7 @@
         "isFamilyFriendly": "true",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "{{ .Permalink }}"
+            "@id": "{{ .RelPermalink }}"
         },
         "author" : {
             "@type": "Person",
@@ -57,7 +57,7 @@
             }
         },
         "image": {{ if .Params.images }}[{{ range $i, $e := .Params.images }}{{ if $i }}, {{ end }}{{ $e | absURL }}{{ end }}]{{ else}}{{.Site.Params.logo | absURL }}{{ end }},
-        "url" : "{{ .Permalink }}",
+        "url" : "{{ .RelPermalink }}",
         "wordCount" : "{{ .WordCount }}",
         "genre" : [ {{ range $index, $tag := .Params.tags }}{{ if $index }}, {{ end }}"{{ $tag }}" {{ end }}],
         "keywords" : [ {{ range $index, $keyword := .Params.keywords }}{{ if $index }}, {{ end }}"{{ $keyword }}" {{ end }}]

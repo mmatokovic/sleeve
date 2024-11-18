@@ -15,7 +15,7 @@
     <div class="relative hidden md:block">
       <aside class="sticky top-4">
         <div class="flex items-center gap-4 mb-2">
-          <a class="text-gray-700 transition hover:text-gray-700/75" href="mailto:?subject={{ .Site.Title }}: {{ .Title }} &amp;body=Check out this latest article from {{ .Site.Title }}: {{ .Permalink }}">
+          <a class="text-gray-700 transition hover:text-gray-700/75" href="mailto:?subject={{ .Site.Title }}: {{ .Title }} &amp;body=Check out this latest article from {{ .Site.Title }}: {{ .RelPermalink }}">
             {{ partial "utils/icon" (dict "name" "send" "attributes" "height=24") }}
           </a>
         </div>
