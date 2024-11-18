@@ -19,5 +19,5 @@
 {{ partialCached "jslibs/alpinejs/script-src" "-" }}
 {{ partialCached "jslibs/turbo/script-src" "-" }}
 {{- with .OutputFormats.Get "rss" -}}
-  {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+  {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .RelPermalink site.Title | safeHTML }}
 {{- end }}
