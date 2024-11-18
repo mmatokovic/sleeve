@@ -6,6 +6,23 @@
 					<span class="text-3xl">Ⰿ</span>
         </a>
       </div>
+      <div class="mr-4 md:mr-0">
+        {{- if hugo.IsMultilingual }}
+          {{- range .Site.Languages }}
+            {{- if eq . $.Site.Language }}
+            <a href="#" class="hidden capitalize text-gray-700 transition hover:text-gray-700/75">
+              {{ .LanguageName  }}
+            </a>
+            {{- else }}
+            {{- range $.Translations }}
+              <a href="{{ .RelPermalink }}" class="py-2.5 text-sm capitalize underline text-gray-700 transition hover:text-gray-700/75" title="{{ .Language.LanguageName }}">
+                {{ partial "utils/icon" (dict "name" "language" "attributes" "height=24") }}
+              </a>
+            {{- end }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+      </div>
       <div class="md:flex md:items-center md:gap-12">
         <div @click.away="open = false" x-data="{ open: false }"
 					class="block md:hidden">
