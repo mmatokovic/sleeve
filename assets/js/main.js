@@ -28,7 +28,7 @@
               var target = targetElement.getBoundingClientRect().top + window.scrollY - offset;
 
               // Check if the document has crossed the page
-              console.log(position, target);
+              //console.log(position, target);
               if (position >= target) {
                   // Remove active from all anchor elements and add it to the current anchor
                   links.forEach(function(link) {
