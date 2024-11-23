@@ -4,10 +4,12 @@
     <div class="lg:col-span-2">
       <header>
         <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">{{ len .Pages }} Reviews</h2>
-        <p class="prose lg:prose-xl text-pretty mt-4 max-w-md text-gray-500">
-          {{ .Content }}
-        </p>
       </header>
+      <article>
+        <div class="prose lg:prose-xl max-w-none text-pretty">
+          {{- .Content -}}
+        </div>
+      </article>
       <ul class="mt-8 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
         {{ range .Paginator.Pages }}
         <li>

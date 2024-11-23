@@ -21,3 +21,4 @@
 {{- with .OutputFormats.Get "rss" -}}
   {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .RelPermalink site.Title | safeHTML }}
 {{- end }}
+{{ block "head-custom" . }}{{ end }}

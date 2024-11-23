@@ -1,0 +1,5 @@
+{{ define "main" }}
+  {{ range .Pages }}
+    {{ partial "jslibs/gallery/gallery-cards.html" . }}
+  {{ end }}
+{{ end }}

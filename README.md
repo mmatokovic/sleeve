@@ -37,6 +37,12 @@ Add the theme directly to your site configuration file `hugo.toml`:
 theme: sleeve
 ```
 
+Start web server
+
+```bash
+hugo server  -F -O -N -D
+```
+
 ## Updating
 
 From the root of your site:
