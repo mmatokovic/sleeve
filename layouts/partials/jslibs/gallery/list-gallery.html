@@ -1,6 +1,3 @@
-{{ define "head-custom" }}
-  {{ partial "jslibs/gallery/head" . }}
-{{ end }}
 {{ with partial "jslibs/gallery/get-gallery" . }}
   {{ $gallery := partial "jslibs/gallery/init" (dict "images" .images) }}
   {{ $params := site.Params.gallerydeluxe }}
@@ -12,4 +9,8 @@
       {{ end }}
     </div>
   </div>
+{{ end }}
+
+{{ define "head-custom" }}
+  {{ partial "jslibs/gallery/head.html" . }}
 {{ end }}
