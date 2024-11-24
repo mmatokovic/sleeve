@@ -12,8 +12,20 @@
 		</a>.
 	</p>
 </div>
-<div x-data="{ show: false }" x-on:scroll.window="show = window.pageYOffset >= 1000" x-cloak class="fixed bottom-8 right-8">
-  <button x-show="show" x-transition x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})" class="cursor-pointer shadow-lg bg-white p-2 rounded-full">
+<div x-data="{ show: false }" 
+     x-on:scroll.window="show = window.pageYOffset >= 1000" 
+     x-cloak 
+     class="fixed bottom-8 right-8">
+  <button 
+    x-show="show" 
+    x-transition:enter="transform transition ease-out duration-300"
+    x-transition:enter-start="translate-y-4 opacity-0"
+    x-transition:enter-end="translate-y-0 opacity-100"
+    x-transition:leave="transform transition ease-in duration-200"
+    x-transition:leave-start="translate-y-0 opacity-100"
+    x-transition:leave-end="translate-y-4 opacity-0"
+    x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})" 
+    class="animate-bounce cursor-pointer shadow-lg bg-white p-2 rounded-full">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
       <path fill="currentColor" d="m11 7.825l-4.9 4.9q-.3.3-.7.288t-.7-.313q-.275-.3-.288-.7t.288-.7l6.6-6.6q.15-.15.325-.212T12 4.425q.2 0 .375.063t.325.212l6.6 6.6q.275.275.275.688t-.275.712q-.3.3-.713.3t-.712-.3L13 7.825V19q0 .425-.288.713T12 20q-.425 0-.713-.288T11 19V7.825Z"/>
     </svg>
