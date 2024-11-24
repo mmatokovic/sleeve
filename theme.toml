@@ -3,17 +3,13 @@ license = 'MIT'
 licenselink = 'https://github.com/mmatokovic/sleeve/blob/main/LICENSE'
 description = 'Sleeve is a minimalist and responsive theme for Hugo designed to create fast, clean, and aesthetically pleasing websites.'
 
-# The home page of the theme, where the source can be found
 homepage = 'https://github.com/mmatokovic/sleeve'
 
-# If you have a running demo of the theme
 demosite = 'https://mmatokovic.github.io/sleeve'
 
-# Taxonomy terms
 tags = ['blog', 'tailwindcss', 'responsive', 'multilingual', 'dark', 'personal']
 features = ['responsive', 'dark mode', 'json-ld']
 
-# If the theme has a single author
 [author]
   name = 'Mislav Matokovic'
   homepage = 'https://mmatokovic.dev'

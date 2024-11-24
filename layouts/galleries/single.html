@@ -1,3 +1,11 @@
 {{ define "main" }}
-  {{ partial "jslibs/gallery/list-gallery.html" . }}
+<section>
+  <article>
+    {{ partial "jslibs/gallery/list-gallery.html" . }}
+  </article>
+</section>
+{{ end }}
+
+{{ define "head-custom" }}
+  {{ partial "jslibs/gallery/head.html" . }}
 {{ end }}

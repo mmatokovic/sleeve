@@ -2,7 +2,7 @@
   {{ range .Paginator.Pages }}
   <div class="mb-8 sm:break-inside-avoid">
     <div class="rounded-lg bg-slate-50 shadow-sm">
-      <div class="flex items-center gap-4 group">
+      <div class="flex items-center group">
         <a href="{{ .RelPermalink }}">
           <article class="group">
             {{ with partial "jslibs/gallery/get-gallery" . }}

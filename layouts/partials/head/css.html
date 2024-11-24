@@ -17,3 +17,8 @@
     {{ end }}
   {{ end }}
 {{ end }}
+
+{{- if site.Params.gallery }}
+{{- $gallery := resources.Get "css/gallery.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $gallery.RelPermalink }}"></link>
+{{- end }}
