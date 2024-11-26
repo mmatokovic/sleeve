@@ -3,7 +3,7 @@
     "inlineImports" true
     "optimize" (not hugo.IsDevelopment)
   }}
-  {{ with . | css.TailwindCSS $opts }}
+  {{ with . | css.PostCSS $opts }}
     {{ if hugo.IsDevelopment }}
       <link rel="stylesheet" href="{{ .RelPermalink }}" />
     {{ else }}
