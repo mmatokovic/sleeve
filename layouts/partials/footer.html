@@ -1,7 +1,7 @@
 <div class="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 text-center">
 	<p>&copy {{ now.Year }}. All rights reserved.
 		<br />
-		{{ $author :=  or (.Params.author) (.Site.Params.author.name) -}}
+		{{ $author := .Site.Params.author.name -}}
 		{{ "Crafted with :heart: by" | .RenderString }} {{$author}}.
 		<br />
 		Powered by
