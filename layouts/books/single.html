@@ -1,30 +1,58 @@
 {{ define "main" }}
 <section>
-  <div class="flex-1 md:flex md:items-center md:gap-4">
-    {{ with .Resources.GetMatch "cover.*" }}
-    <img
-      src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ .Params.alt }}"
-      class="rounded-lg object-cover"
-    />
-    {{ end }}
-    <div>
-      <h3 class="text-lg/tight font-medium text-gray-900">{{ .Title }}</h3>
-      <p>Author: {{ .Params.author }}</p>
-      <p class="mt-0.5 text-gray-700">
-        ISBN: {{ .Params.isbn }}<br>
-        Rating: {{ .Params.rating }}<br>
-        Review date: {{ .Date | time.Format ":date_long" }}
-      </p>
-      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-      {{- $taxonomyObject := .Site.Taxonomies.genres }}
-      {{- with $taxonomyObject }}
-      <p class="text-xs text-gray-500">
-        Genres: 
-        {{- range $term, $weightedPages := $taxonomyObject }}
-          <a href="{{ .Page.RelPermalink }}" class="font-medium underline hover:text-gray-700">{{ .Page.LinkTitle }}</a>
-        {{- end }}
-      </p>
-      {{- end }}
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-8 mb-2.5">
+    <div class="md:col-span-1">
+      {{ with .Resources.GetMatch "cover.*" }}
+      <div class="max-w-lg md:max-w-none">
+        <img
+          src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ .Params.alt }}"
+          class="rounded-lg mx-auto"
+        />
+      </div>
+      {{ end }}
+    </div>
+    <div class="md:col-span-3">
+      <div class="flow-root">
+        <dl class="-my-3 divide-y divide-gray-100 text-sm">
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+            <dt class="font-medium text-gray-900">Title</dt>
+            <dd class="text-gray-700 sm:col-span-2">{{ .Title }}</dd>
+          </div>   
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+            <dt class="font-medium text-gray-900">Author</dt>
+            <dd class="text-gray-700 sm:col-span-2">{{ .Params.author }}</dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+            <dt class="font-medium text-gray-900">ISBN</dt>
+            <dd class="text-gray-700 sm:col-span-2">{{ .Params.isbn }}</dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+            <dt class="font-medium text-gray-900">Rating</dt>
+            <dd class="text-gray-700 sm:col-span-2">{{ .Params.rating }}</dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+            <dt class="font-medium text-gray-900">Review date</dt>
+            <dd class="text-gray-700 sm:col-span-2">{{ .Date | time.Format ":date_long" }}</dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+            <dt class="font-medium text-gray-900">Genres</dt>
+            <dd class="text-gray-700 sm:col-span-2">
+              {{- $taxonomyObject := .Site.Taxonomies.genres }}
+              {{- with $taxonomyObject }}
+              <p class="text-xs text-gray-500">
+                {{- range $term, $weightedPages := $taxonomyObject }}
+                <a href="{{ .Page.RelPermalink }}" class="font-medium underline hover:text-gray-700">{{ .Page.LinkTitle }}</a>
+                {{- end }}
+              </p>
+              {{- end }}
+            </dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+            <dt class="font-medium text-gray-900">Tags</dt>
+            <dd class="text-gray-700 sm:col-span-2">{{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}</dd>
+          </div>
+        </dl>
+      </div>
     </div>
   </div>
   <article class="prose lg:prose-xl max-w-none prose-img:mx-auto text-pretty">
