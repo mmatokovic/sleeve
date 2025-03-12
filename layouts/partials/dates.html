@@ -1,6 +1,6 @@
 {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-{{ $dateHuman := .Date | time.Format "Jan 2 '06" }}
-{{ $lastModHuman := .Lastmod | time.Format "Jan 2 '06" }}
+{{ $dateHuman := .Date | time.Format "Jan 2 '06" | strings.FirstUpper}}
+{{ $lastModHuman := .Lastmod | time.Format "Jan 2 '06" | strings.FirstUpper }}
 <small class="text-xs text-gray-500">
   <time datetime="{{ $dateMachine }}">Posted on {{ $dateHuman }} • Updated on {{ $lastModHuman }}</time>
 </small>
