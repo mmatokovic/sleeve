@@ -10,8 +10,3 @@
 {{- $contact := resources.Get "js/contact.js" | js.Build $opts | fingerprint }}
 <script defer src="{{ $contact.RelPermalink }}"></script>
 {{- end }}
-
-{{- if site.Params.gallery }}
-{{- $gallery := resources.Get "js/libs/gallery/index.js" | js.Build $opts | fingerprint }}
-<script src="{{ $gallery.RelPermalink }}" integrity="{{- .Data.Integrity }}"></script>
-{{- end }}

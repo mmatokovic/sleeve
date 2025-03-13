@@ -1,5 +1,6 @@
 <div class="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 text-center">
-	<p>&copy {{ now.Year }}. All rights reserved.
+	<p>{{ now.Year }} &copy <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" class="text-gray-700 underline transition hover:text-gray-700/75">
+    Some rights reserved</a>.
 		<br />
 		{{ $author := .Site.Params.author.name -}}
 		{{ "Crafted with :heart: by" | .RenderString }} {{$author}}.
@@ -8,8 +9,7 @@
 		<a href="https://gohugo.io/" target="_blank" class="text-gray-700 underline transition hover:text-gray-700/75">Hugo</a>
 		and the
 		<a href="https://github.com/mmatokovic/sleeve.git" target="_blank" class="text-gray-700 underline transition hover:text-gray-700/75">
-			Sleeve theme
-		</a>.
+			Sleeve theme</a>.
 	</p>
 </div>
 <div x-data="{ show: false }" 

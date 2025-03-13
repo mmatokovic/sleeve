@@ -1,6 +1,0 @@
-{{ $js := resources.Get "js/libs/gallery/dist/cdn.js" }}
-{{ $js = $js | js.Build (dict "params" site.Params.gallerydeluxe "minify" hugo.IsProduction) }}
-{{ if hugo.IsProduction}}
-    {{ $js = $js | fingerprint }}
-{{ end }}
-<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
