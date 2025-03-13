@@ -27,8 +27,8 @@ hugo mod npm pack
 Then install or update the all required dependencies.
 
 ```bash
-npm install
-npm update
+pnpm i
+pnpm up
 ```
 
 Add the theme directly to your site configuration file `hugo.toml`:

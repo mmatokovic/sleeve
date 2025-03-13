@@ -5,6 +5,15 @@
       <div class="flex-1 items-center group">
         <a href="{{ .RelPermalink }}">
           <article class="group">
+          {{ with .Resources.GetMatch .Params.thumbnail }}
+            <img
+              src="{{ .RelPermalink }}"
+              alt="{{ .Name }}"
+              width="{{ .Width }}"
+              height="{{ .Height }}"
+              class="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
+            />
+          {{ end }}
             <div class="p-4">
                 <h3 class="text-lg font-medium text-gray-900">{{ .LinkTitle }}</h3>
                 <dl class="flex gap-2">

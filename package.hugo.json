@@ -2,17 +2,17 @@
   "name": "sleeve",
   "version": "1.0.0",
   "description": "My personal Hugo theme.",
+  "license": "MIT",
   "author": "Mislav Matoković <me@mmatokovic.dev>",
   "repository": "github:mmatokovic/sleeve",
   "devDependencies": {
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "4.0.12",
+    "alpinejs": "^3.14.8",
     "alpine-turbo-drive-adapter": "^2.1.0",
-    "alpinejs": "^3.14.1",
-    "tailwindcss": "4.0.0-beta.2",
-    "postcss-cli": "^10.1.0",
-    "@hotwired/turbo": "^8.0.10",
-    "@tailwindcss/cli": "4.0.0-beta.2",
-    "@tailwindcss/typography": "^0.5.15",
-    "@tailwindcss/postcss": "4.0.0-beta.2",
-    "@tailwindcss/forms": "^0.5.9"
+    "@hotwired/turbo": "^8.0.13",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/postcss": "^4.0.12",
+    "@tailwindcss/typography": "^0.5.16"
   }
 }
