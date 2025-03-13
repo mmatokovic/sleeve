@@ -5,15 +5,6 @@
   {{- range $paginator.Pages.ByDate }}
   <article class="mb-3 flex relative h-48 overflow-hidden sm:h-48 lg:order-last lg:h-48 group">
     <div class="hidden sm:block sm:basis-56">
-      {{ with partial "jslibs/gallery/get-gallery" . }}
-      <img
-          src="{{ .thumb.RelPermalink }}"
-          alt="{{ .thumb.Name }}"
-          width="{{ .thumb.Width }}"
-          height="{{ .thumb.Height }}"
-          class="rounded-lg aspect-video h-full w-full object-cover transition group-hover:grayscale-[50%]"
-      />
-      {{ end }}
     </div>
     <div class="flex flex-1 flex-col justify-between md:pl-4">
       <div class="border-s border-gray-900/10 p-1 sm:border-l-transparent sm:p-2">
