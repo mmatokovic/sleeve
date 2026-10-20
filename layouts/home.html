@@ -1,7 +1,7 @@
 {{ define "main" }}
 <section aria-labelledby="latest-posts">
   <h2 id="latest-posts" class="flex justify-end font-medium text-gray-900 uppercase">{{ T "latestPosts" }}</h2>
-  {{- range first 3 (where site.RegularPages "Type" "posts") }}
+  {{- range $i, $_ := first 3 (where site.RegularPages "Type" "posts") }}
   {{- $post := . }}
   <article class="group mb-3 flex h-48 overflow-hidden">
     {{- $thumb := "" }}
@@ -14,7 +14,11 @@
         width="{{ .Width }}"
         height="{{ .Height }}"
         alt=""
+        {{- if eq $i 0 }}
+        fetchpriority="high"
+        {{- else }}
         loading="lazy"
+        {{- end }}
         decoding="async"
         class="h-full w-full rounded-lg object-cover transition group-hover:grayscale-50"
       >

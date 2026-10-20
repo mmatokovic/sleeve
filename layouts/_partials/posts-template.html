@@ -1,17 +1,24 @@
 <div class="mt-8 sm:columns-2 sm:gap-6 lg:columns-3 lg:gap-8">
-  {{- range .Paginator.Pages }}
+  {{- range $i, $_ := .Paginator.Pages }}
   <article class="group relative mb-8 rounded-lg bg-slate-50 shadow-sm sm:break-inside-avoid">
     {{- $post := . }}
     {{- $thumb := "" }}
     {{- with .Params.thumbnail }}{{ $thumb = $post.Resources.Get . }}{{ end }}
     {{- with $thumb }}
+      {{- $small := .Process "fill 400x224 webp" }}
       {{- with .Process "fill 800x448 webp" }}
     <img
       src="{{ .RelPermalink }}"
+      srcset="{{ $small.RelPermalink }} 400w, {{ .RelPermalink }} 800w"
+      sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, calc(100vw - 2rem)"
       width="{{ .Width }}"
       height="{{ .Height }}"
       alt=""
+      {{- if eq $i 0 }}
+      fetchpriority="high"
+      {{- else }}
       loading="lazy"
+      {{- end }}
       decoding="async"
       class="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-50"
     >

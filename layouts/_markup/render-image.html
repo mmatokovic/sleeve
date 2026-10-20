@@ -5,23 +5,48 @@
   {{- $path := strings.TrimPrefix "./" $u.Path }}
   {{- with or (.PageInner.Resources.Get $path) (resources.Get $path) }}
     {{- $img = . }}
+  {{- end }}
+{{- end }}
+
+{{- $attrs := dict "alt" .PlainText "loading" "lazy" "decoding" "async" }}
+{{- with $img }}
+  {{- if in (slice "image/jpeg" "image/png" "image/webp") .MediaType.Type }}
+    {{- $srcset := slice }}
+    {{- $largest := . }}
+    {{- range slice 480 800 1200 }}
+      {{- if le . $img.Width }}
+        {{- $largest = $img.Resize (printf "%dx webp" .) }}
+        {{- $srcset = $srcset | append (printf "%s %dw" $largest.RelPermalink .) }}
+      {{- end }}
+    {{- end }}
+    {{- if not $srcset }}
+      {{- $largest = $img.Resize (printf "%dx webp" $img.Width) }}
+      {{- $srcset = slice (printf "%s %dw" $largest.RelPermalink $img.Width) }}
+    {{- end }}
+    {{- $src = $largest.RelPermalink }}
+    {{- $attrs = merge $attrs (dict
+      "srcset" (delimit $srcset ", ")
+      "sizes" "(min-width: 1024px) 680px, calc(100vw - 2rem)"
+      "width" $largest.Width
+      "height" $largest.Height
+    ) }}
+  {{- else }}
     {{- $src = .RelPermalink }}
   {{- end }}
 {{- end }}
-{{- $attrs := "" }}
-{{- with $img }}
-  {{- if in (slice "image/jpeg" "image/png" "image/webp" "image/gif") .MediaType.Type }}
-    {{- $attrs = printf ` width="%d" height="%d"` .Width .Height }}
-  {{- end }}
+{{- $attrs = merge $attrs (dict "src" $src) }}
+{{- $attrString := "" }}
+{{- range $k, $v := $attrs }}
+  {{- $attrString = printf `%s %s="%s"` $attrString $k (string $v | htmlEscape) }}
 {{- end }}
 
 {{- if .IsBlock }}
 <figure>
-  <img src="{{ $src }}" alt="{{ .PlainText }}" loading="lazy" decoding="async" class="h-auto rounded-xl"{{ $attrs | safeHTMLAttr }}>
+  <img class="h-auto rounded-xl"{{ $attrString | safeHTMLAttr }}>
   {{- with .Title }}
   <figcaption class="text-center"><small>{{ . }}</small></figcaption>
   {{- end }}
 </figure>
 {{- else -}}
-<img src="{{ $src }}" alt="{{ .PlainText }}" loading="lazy" decoding="async" class="h-auto w-full rounded-xl"{{ with .Title }} title="{{ . }}"{{ end }}{{ $attrs | safeHTMLAttr }}>
+<img class="h-auto w-full rounded-xl"{{ with .Title }} title="{{ . }}"{{ end }}{{ $attrString | safeHTMLAttr }}>
 {{- end -}}

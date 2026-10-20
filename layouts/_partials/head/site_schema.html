@@ -25,7 +25,7 @@
   {{- $images := slice }}
   {{- range .Params.images }}{{ $images = $images | append (absURL .) }}{{ end }}
   {{- with .Params.thumbnail }}
-    {{- with $.Resources.Get . }}{{ $images = $images | append .Permalink }}{{ end }}
+    {{- with $.Resources.Get . }}{{ $images = $images | append (.Resize (printf "%dx webp" (int (math.Min .Width 1200)))).Permalink }}{{ end }}
   {{- end }}
 
   {{- $schema := dict
