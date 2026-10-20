@@ -1,11 +1,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{{- if not hugo.IsProduction }}
+<meta name="robots" content="noindex">
+{{- end }}
 {{- if ne site.Params.darkMode false }}
-<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}document.documentElement.classList.toggle('dark',t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches)})()</script>
+{{- with resources.Get "js/theme-init.js" | js.Build (dict "minify" true) | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
 {{- end }}
 {{ hugo.Generator }}
 <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
-<meta name="description" content="{{ or .Description site.Params.description }}">
+{{- $description := .Description }}
+{{- if and (not $description) .IsPage }}
+  {{- $description = .Summary | plainify | htmlUnescape | strings.TrimSpace | truncate 160 }}
+{{- end }}
+<meta name="description" content="{{ or $description site.Params.description }}">
 <meta name="author" content="{{ or .Params.author site.Params.author.name }}">
 {{- with .Params.keywords }}
 <meta name="keywords" content="{{ delimit . ", " }}">
@@ -25,22 +34,32 @@
 {{- range .AllTranslations }}
 <link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">
 {{- end }}
-{{ partial "schema.html" . }}
-{{ partial "twitter_cards.html" . }}
-{{ partial "opengraph.html" . }}
+{{- with index .AllTranslations 0 }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{- end }}
+{{- $shareImage := "" }}
 {{- if not .Params.images }}
   {{- with .Params.thumbnail }}
     {{- with $.Resources.Get . }}
-      {{- with .Process "fill 1200x630 jpg" }}
+      {{- $shareImage = .Process "fill 1200x630 jpg" }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- if .Params.images }}
+{{ partial "twitter_cards.html" . }}
+{{- else }}
+<meta name="twitter:card" content="{{ if $shareImage }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:title" content="{{ .Title | default site.Title }}">
+<meta name="twitter:description" content="{{ or $description site.Params.description }}">
+{{- end }}
+{{ partial "opengraph.html" . }}
+{{- with $shareImage }}
 <meta property="og:image" content="{{ .Permalink }}">
 <meta property="og:image:width" content="{{ .Width }}">
 <meta property="og:image:height" content="{{ .Height }}">
 <meta name="twitter:image" content="{{ .Permalink }}">
-      {{- end }}
-    {{- end }}
-  {{- end }}
 {{- end }}
-{{ partial "google_analytics.html" . }}
+{{ partial "analytics" . }}
 {{ partial "head/site_schema" . }}
 {{ with (templates.Defer (dict "key" "global")) }}
   {{ partial "head/css" . }}

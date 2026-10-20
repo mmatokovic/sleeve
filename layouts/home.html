@@ -3,40 +3,43 @@
   <h2 id="latest-posts" class="flex justify-end font-medium text-gray-900 dark:text-gray-100 uppercase">{{ T "latestPosts" }}</h2>
   {{- range $i, $_ := first 3 (where site.RegularPages "Type" "posts") }}
   {{- $post := . }}
-  <article class="group mb-3 flex h-48 overflow-hidden">
+  <article class="group mb-3 flex min-h-48">
     {{- $thumb := "" }}
     {{- with .Params.thumbnail }}{{ $thumb = $post.Resources.Get . }}{{ end }}
     {{- with $thumb }}
     <div class="hidden sm:block sm:basis-56 sm:shrink-0">
       {{- with .Process "fill 448x384 webp" }}
-      <img
-        src="{{ .RelPermalink }}"
-        width="{{ .Width }}"
-        height="{{ .Height }}"
-        alt=""
-        {{- if eq $i 0 }}
-        fetchpriority="high"
-        {{- else }}
-        loading="lazy"
-        {{- end }}
-        decoding="async"
-        class="h-full w-full rounded-lg object-cover transition group-hover:grayscale-50"
-      >
+      <picture>
+        <source media="(min-width: 640px)" srcset="{{ .RelPermalink }}">
+        <img
+          src="data:,"
+          width="{{ .Width }}"
+          height="{{ .Height }}"
+          alt=""
+          {{- if eq $i 0 }}
+          fetchpriority="high"
+          {{- else }}
+          loading="lazy"
+          {{- end }}
+          decoding="async"
+          class="h-full w-full rounded-lg object-cover transition group-hover:grayscale-50"
+        >
+      </picture>
       {{- end }}
     </div>
     {{- end }}
-    <div class="flex min-w-0 flex-1 flex-col justify-between md:pl-4">
-      <div class="border-s border-gray-900/10 dark:border-white/10 p-1 sm:border-s-transparent sm:p-2">
+    <div class="flex min-w-0 flex-1 flex-col md:pl-4">
+      <div class="flex flex-1 flex-col border-s border-gray-900/10 dark:border-white/10 p-1 sm:border-s-transparent sm:p-2">
         {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
         {{ partial "dates" . }}
         <h3 class="border-b-2 border-gray-100 dark:border-gray-800 pt-2 font-medium text-gray-900 dark:text-gray-100 uppercase hover:text-gray-900/75 dark:hover:text-gray-100/75">
           <a href="{{ .RelPermalink }}" data-turbo="false">{{ .Title }}</a>
         </h3>
         <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700 dark:text-gray-300">
-          {{ .Summary | plainify | htmlUnescape | truncate 142 }}
+          {{ .Summary | plainify | htmlUnescape | truncate 300 }}
         </p>
         {{- if .Truncated }}
-        <a href="{{ .RelPermalink }}" data-turbo="false" class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
+        <a href="{{ .RelPermalink }}" data-turbo="false" class="mt-auto self-start text-xs font-bold text-gray-700 dark:text-gray-300 uppercase transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
           {{ T "readMore" }}<span class="sr-only">: {{ .Title }}</span>
         </a>
         {{- end }}

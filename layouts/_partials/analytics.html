@@ -1,0 +1,7 @@
+{{- with partial "utils/analytics-id" . }}
+{{- $id := . }}
+{{- $opts := dict "minify" true }}
+{{- with resources.Get "js/analytics.js" | js.Build $opts | fingerprint }}
+<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" data-id="{{ $id }}" data-event="{{ if site.Params.turbo }}turbo:load{{ else }}DOMContentLoaded{{ end }}"></script>
+{{- end }}
+{{- end }}

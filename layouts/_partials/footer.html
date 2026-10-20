@@ -9,6 +9,10 @@
     <a href="https://gohugo.io/" rel="noopener" target="_blank" class="text-gray-700 dark:text-gray-300 underline transition hover:text-gray-700/75 dark:hover:text-gray-300/75">Hugo</a>
     {{ T "and" }}
     <a href="https://github.com/mmatokovic/sleeve" rel="noopener" target="_blank" class="text-gray-700 dark:text-gray-300 underline transition hover:text-gray-700/75 dark:hover:text-gray-300/75">Sleeve</a>.
+    {{- with partial "utils/analytics-id" . }}
+    <br>
+    <button type="button" data-consent="open" class="cursor-pointer text-gray-700 dark:text-gray-300 underline transition hover:text-gray-700/75 dark:hover:text-gray-300/75">{{ T "consentSettings" }}</button>
+    {{- end }}
   </p>
 </div>
 <div x-data="{ show: false }" x-on:scroll.window="show = window.scrollY >= 1000" class="fixed right-8 bottom-8">

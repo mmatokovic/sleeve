@@ -102,11 +102,20 @@
 [contactSend]
   other = 'Pošalji upit'
 
-[contact_submitted]
-  other = 'Vaša poruka je poslana.'
+[consentTitle]
+  other = 'Kolačići'
 
-[contact_error]
-  other = 'Došlo je do pogreške pri slanju poruke.'
+[consentText]
+  other = 'Uz vašu privolu koristim Google Analytics kolačiće kako bih vidio koliko se stranica čita. Bez privole ne učitava se nikakav kod za praćenje.'
+
+[consentAccept]
+  other = 'Prihvati'
+
+[consentDecline]
+  other = 'Odbij'
+
+[consentSettings]
+  other = 'Postavke kolačića'
 
 [toggleDarkMode]
   other = 'Uključi ili isključi tamni način'

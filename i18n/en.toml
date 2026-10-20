@@ -101,11 +101,20 @@
 [contactSend]
   other = 'Send enquiry'
 
-[contact_submitted]
-  other = "Your message was sent."
+[consentTitle]
+  other = 'Cookies'
 
-[contact_error]
-  other = "There was an error sending the message."
+[consentText]
+  other = 'With your consent I use Google Analytics cookies to see how much the site is read. Without consent no tracking code is loaded.'
+
+[consentAccept]
+  other = 'Accept'
+
+[consentDecline]
+  other = 'Decline'
+
+[consentSettings]
+  other = 'Cookie settings'
 
 [toggleDarkMode]
   other = 'Toggle dark mode'

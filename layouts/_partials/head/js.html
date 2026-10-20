@@ -4,8 +4,3 @@
 <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
 {{- end }}
 
-{{- if .HasShortcode "contact" }}
-{{- with resources.Get "js/contact.js" | js.Build $opts | fingerprint }}
-<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-{{- end }}
-{{- end }}

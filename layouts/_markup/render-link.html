@@ -1,10 +1,12 @@
 {{- $u := urls.Parse .Destination }}
 {{- $href := .Destination }}
 {{- if and (not $u.IsAbs) $u.Path }}
+  {{- $query := "" }}
+  {{- with $u.RawQuery }}{{ $query = printf "?%s" . }}{{ end }}
   {{- $fragment := "" }}
   {{- with $u.Fragment }}{{ $fragment = printf "#%s" . }}{{ end }}
   {{- with .PageInner.GetPage $u.Path }}
-    {{- $href = printf "%s%s" .RelPermalink $fragment }}
+    {{- $href = printf "%s%s%s" .RelPermalink $query $fragment }}
   {{- else }}
     {{- with or (.PageInner.Resources.Get $u.Path) (resources.Get $u.Path) }}
       {{- $href = .RelPermalink }}
