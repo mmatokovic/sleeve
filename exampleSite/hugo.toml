@@ -1,0 +1,93 @@
+baseURL = 'https://example.org/'
+locale = 'en'
+title = 'Sleeve'
+theme = 'sleeve'
+themesDir = '../..'
+enableRobotsTXT = true
+
+[params]
+  description = 'A demo of the Sleeve theme for Hugo.'
+  intro = 'A minimal, fast and accessible blog theme for Hugo.'
+  alpine = true
+  turbo = true
+  darkMode = true
+  [params.author]
+    name = 'Jane Doe'
+    email = 'jane@example.org'
+  [params.license]
+    name = 'CC BY 4.0'
+    url = 'https://creativecommons.org/licenses/by/4.0/'
+
+[taxonomies]
+  tag = 'tags'
+  series = 'series'
+  genre = 'genres'
+
+[pagination]
+  pagerSize = 9
+
+[[menus.main]]
+  name = 'Home'
+  pageRef = '/'
+  weight = 10
+[[menus.main]]
+  name = 'Posts'
+  pageRef = '/posts'
+  weight = 20
+[[menus.main]]
+  name = 'Books'
+  pageRef = '/books'
+  weight = 30
+[[menus.main]]
+  name = 'About'
+  pageRef = '/about'
+  weight = 40
+[[menus.main]]
+  name = 'Contact'
+  pageRef = '/contact'
+  weight = 50
+[[menus.main]]
+  name = 'Tags'
+  pageRef = '/tags'
+  weight = 60
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.parser]
+      wrapStandAloneImageWithinParagraph = false
+      [markup.goldmark.parser.attribute]
+        block = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    disableWatch = true
+    source = 'hugo_stats.json'
+    target = 'assets/notwatching/hugo_stats.json'
+
+[build]
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]]
+    source = 'assets/notwatching/hugo_stats\.json'
+    target = 'css'
+  [[build.cachebusters]]
+    source = 'layouts/.*'
+    target = 'css'
+
+[security]
+  [security.exec]
+    allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
+  [security.node.permissions]
+    allowAddons = ['tailwindcss']
+    allowWorker = ['tailwindcss']

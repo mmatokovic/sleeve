@@ -1,0 +1,23 @@
+{{- with .GetTerms "series" }}
+  {{- $term := index . 0 }}
+  {{- $parts := $term.Pages.ByDate }}
+  {{- $part := 0 }}
+  {{- range $i, $p := $parts }}{{ if eq $p $ }}{{ $part = add $i 1 }}{{ end }}{{ end }}
+<details class="group mt-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm"{{ if le (len $parts) 5 }} open{{ end }}>
+  <summary class="flex cursor-pointer items-center justify-between px-4 py-2 text-gray-700 dark:text-gray-300">
+    <span>{{ T "partOfSeries" (dict "Part" $part "Total" (len $parts)) }} <a href="{{ $term.RelPermalink }}" class="font-medium underline">{{ $term.LinkTitle }}</a></span>
+    <span class="shrink-0 transition duration-300 group-open:-rotate-180" aria-hidden="true">▾</span>
+  </summary>
+  <ol class="list-inside list-decimal space-y-1 px-4 pb-3 text-gray-600 dark:text-gray-400">
+    {{- range $parts }}
+    <li>
+      {{- if eq . $ }}
+      <span aria-current="page" class="font-medium text-gray-900 dark:text-gray-100">{{ .LinkTitle }}</span>
+      {{- else }}
+      <a href="{{ .RelPermalink }}" class="underline hover:text-gray-900 dark:hover:text-gray-100">{{ .LinkTitle }}</a>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ol>
+</details>
+{{- end }}

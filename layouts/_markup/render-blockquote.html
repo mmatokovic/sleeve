@@ -1,9 +1,25 @@
-{{- $quote := printf `<blockquote%s>%s</blockquote>` (cond (isset .Attributes "cite") (printf ` cite="%s"` (.Attributes.cite | htmlEscape)) "") .Text }}
-{{- with .Attributes.caption }}
+{{- if eq .Type "alert" }}
+  {{- $styles := dict
+    "note" "border-blue-500 bg-blue-50 text-blue-900 dark:bg-blue-950/50 dark:text-blue-100"
+    "tip" "border-green-500 bg-green-50 text-green-900 dark:bg-green-950/50 dark:text-green-100"
+    "important" "border-purple-500 bg-purple-50 text-purple-900 dark:bg-purple-950/50 dark:text-purple-100"
+    "warning" "border-amber-500 bg-amber-50 text-amber-900 dark:bg-amber-950/50 dark:text-amber-100"
+    "caution" "border-red-500 bg-red-50 text-red-900 dark:bg-red-950/50 dark:text-red-100"
+  }}
+  {{- $type := lower .AlertType }}
+  {{- $class := index $styles $type | default (index $styles "note") }}
+<div class="not-prose my-6 rounded-r-lg border-l-4 px-4 py-3 {{ $class }}" role="note">
+  <p class="mb-1 font-semibold">{{ or .AlertTitle (T $type) (title $type) }}</p>
+  <div class="[&_a]:underline [&_p]:my-1">{{ .Text }}</div>
+</div>
+{{- else }}
+  {{- $quote := printf `<blockquote%s>%s</blockquote>` (cond (isset .Attributes "cite") (printf ` cite="%s"` (.Attributes.cite | htmlEscape)) "") .Text }}
+  {{- with .Attributes.caption }}
 <figure>
   {{ $quote | safeHTML }}
-  <figcaption class="text-sm text-gray-500">{{ . | safeHTML }}</figcaption>
+  <figcaption class="text-sm text-gray-500 dark:text-gray-400">{{ . | safeHTML }}</figcaption>
 </figure>
-{{- else }}
+  {{- else }}
 {{ $quote | safeHTML }}
+  {{- end }}
 {{- end }}

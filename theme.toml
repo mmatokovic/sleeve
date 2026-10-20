@@ -1,15 +1,13 @@
 name = 'Sleeve'
 license = 'MIT'
 licenselink = 'https://github.com/mmatokovic/sleeve/blob/main/LICENSE'
-description = 'Sleeve is a minimalist and responsive theme for Hugo designed to create fast, clean, and aesthetically pleasing websites.'
-
+description = 'A minimal, fast and accessible Hugo blog theme built with Tailwind CSS v4, with dark mode, multilingual support and responsive images.'
 homepage = 'https://github.com/mmatokovic/sleeve'
-
-demosite = 'https://mmatokovic.github.io/sleeve'
-
-tags = ['blog', 'tailwindcss', 'responsive', 'multilingual', 'dark', 'personal']
-features = ['responsive', 'dark mode', 'json-ld']
+demosite = 'https://misli.mmatokovic.dev'
+min_version = '0.161.0'
+tags = ['blog', 'tailwindcss', 'responsive', 'multilingual', 'dark', 'personal', 'minimal', 'accessible']
+features = ['responsive', 'dark mode', 'multilingual', 'json-ld', 'open graph', 'responsive images', 'table of contents', 'series', 'math', 'alerts', 'contact form']
 
 [author]
-  name = 'Mislav Matokovic'
+  name = 'Mislav Matoković'
   homepage = 'https://mmatokovic.dev'

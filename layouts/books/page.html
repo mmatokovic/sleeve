@@ -13,32 +13,32 @@
     </div>
     <div class="md:col-span-3">
       <div class="flow-root">
-        <dl class="-my-3 divide-y divide-gray-100 text-sm">
+        <dl class="-my-3 divide-y divide-gray-100 dark:divide-gray-800 text-sm">
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-900">Title</dt>
-            <dd class="text-gray-700 sm:col-span-2">{{ .Title }}</dd>
+            <dt class="font-medium text-gray-900 dark:text-gray-100">Title</dt>
+            <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ .Title }}</dd>
           </div>
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-900">Author</dt>
-            <dd class="text-gray-700 sm:col-span-2">{{ .Params.author }}</dd>
+            <dt class="font-medium text-gray-900 dark:text-gray-100">Author</dt>
+            <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ .Params.author }}</dd>
           </div>
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-900">ISBN</dt>
-            <dd class="text-gray-700 sm:col-span-2">{{ .Params.isbn }}</dd>
+            <dt class="font-medium text-gray-900 dark:text-gray-100">ISBN</dt>
+            <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ .Params.isbn }}</dd>
           </div>
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-900">Rating</dt>
-            <dd class="text-gray-700 sm:col-span-2">{{ .Params.rating }}</dd>
+            <dt class="font-medium text-gray-900 dark:text-gray-100">Rating</dt>
+            <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ .Params.rating }}</dd>
           </div>
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-900">Review date</dt>
-            <dd class="text-gray-700 sm:col-span-2">{{ .Date | time.Format ":date_long" }}</dd>
+            <dt class="font-medium text-gray-900 dark:text-gray-100">Review date</dt>
+            <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ .Date | time.Format ":date_long" }}</dd>
           </div>
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-900">Genres</dt>
-            <dd class="flex flex-wrap gap-2 text-xs text-gray-500 sm:col-span-2">
+            <dt class="font-medium text-gray-900 dark:text-gray-100">Genres</dt>
+            <dd class="flex flex-wrap gap-2 text-xs text-gray-500 dark:text-gray-400 sm:col-span-2">
               {{- range .GetTerms "genres" }}
-              <a href="{{ .RelPermalink }}" class="font-medium underline hover:text-gray-700">{{ .LinkTitle }}</a>
+              <a href="{{ .RelPermalink }}" class="font-medium underline hover:text-gray-700 dark:hover:text-gray-200">{{ .LinkTitle }}</a>
               {{- end }}
             </dd>
           </div>
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <article class="prose lg:prose-xl max-w-none prose-img:mx-auto text-pretty">
+  <article class="prose dark:prose-invert lg:prose-xl max-w-none prose-img:mx-auto text-pretty">
     {{ .Content }}
   </article>
 </section>

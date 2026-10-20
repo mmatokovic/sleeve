@@ -1,9 +1,9 @@
 {{- $pag := .Paginator }}
 {{- if gt $pag.TotalPages 1 }}
-{{- $link := "inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700" }}
+{{- $link := "inline-flex items-center px-4 pt-4 text-lg font-medium hover:text-gray-700 dark:hover:text-gray-200" }}
 {{- $ellipsisShown := false }}
 <nav aria-label="{{ T "pagination" }}" class="flex items-center justify-center px-4 sm:px-0">
-  <ul class="flex flex-wrap justify-center border-t border-gray-900/10 text-gray-500">
+  <ul class="flex flex-wrap justify-center border-t border-gray-900/10 dark:border-white/10 text-gray-500 dark:text-gray-400">
     {{- if gt $pag.PageNumber 2 }}
     <li><a href="{{ $pag.First.URL }}" class="{{ $link }}">« {{ T "first" }}</a></li>
     {{- end }}
@@ -13,7 +13,7 @@
 
     {{- range $pag.Pagers }}
       {{- if eq .PageNumber $pag.PageNumber }}
-    <li><span aria-current="page" class="inline-flex items-center px-4 pt-4 text-lg font-medium text-gray-900">{{ .PageNumber }}</span></li>
+    <li><span aria-current="page" class="inline-flex items-center px-4 pt-4 text-lg font-medium text-gray-900 dark:text-gray-100">{{ .PageNumber }}</span></li>
       {{- else if and (ge .PageNumber (sub $pag.PageNumber 2)) (le .PageNumber (add $pag.PageNumber 2)) }}
         {{- $ellipsisShown = false }}
     <li><a href="{{ .URL }}" class="{{ $link }}">{{ .PageNumber }}</a></li>

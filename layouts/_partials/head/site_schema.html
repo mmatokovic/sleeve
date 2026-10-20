@@ -11,7 +11,7 @@
   }}
   {{- with site.Params.description }}{{ $schema = merge $schema (dict "description" .) }}{{ end }}
   {{- with $logo }}{{ $schema = merge $schema (dict "thumbnailUrl" .) }}{{ end }}
-  {{- with site.Params.licence }}{{ $schema = merge $schema (dict "license" .) }}{{ end }}
+  {{- with site.Params.license.url }}{{ $schema = merge $schema (dict "license" .) }}{{ end }}
 <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
 
 {{- else if .IsPage }}

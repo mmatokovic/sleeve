@@ -16,7 +16,7 @@
   {{- end }}
 {{- end -}}
 {{- $isHTTP := in (slice "http" "https") $u.Scheme -}}
-<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isHTTP }} target="_blank" rel="noopener noreferrer"{{ end }} class="font-medium text-blue-600 hover:underline">
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isHTTP }} target="_blank" rel="noopener noreferrer"{{ end }} class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
   {{- .Text }}
   {{- if $isHTTP }}<span class="sr-only"> ({{ T "opensInNewTab" }})</span>{{ partial "utils/icon" (dict "name" "external-link" "attributes" `height="0.9em" class="ml-0.5 inline align-baseline"`) }}{{ end -}}
 </a>

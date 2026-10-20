@@ -4,9 +4,6 @@
 [header]
   other = 'Pozdrav!'
 
-[intro]
-  other = 'Ja sam Mislav i volim pisati kad imam slobodnog vremena.'
-
 [home]
   other = 'Početna'
 
@@ -24,9 +21,6 @@
 
 [backToTop]
   other = 'Natrag na vrh'
-
-[someRightsReserved]
-  other = 'Neka prava pridržana'
 
 [latestPosts]
   other = 'Najnoviji članci'
@@ -113,3 +107,41 @@
 
 [contact_error]
   other = 'Došlo je do pogreške pri slanju poruke.'
+
+[toggleDarkMode]
+  other = 'Uključi ili isključi tamni način'
+
+[poweredBy]
+  other = 'Pokreće'
+
+[and]
+  other = 'i'
+
+[readingTime]
+  one = '{{ .Count }} min čitanja'
+  few = '{{ .Count }} min čitanja'
+  other = '{{ .Count }} min čitanja'
+
+[olderPost]
+  other = 'Stariji članak'
+
+[newerPost]
+  other = 'Noviji članak'
+
+[partOfSeries]
+  other = 'Dio {{ .Part }} od {{ .Total }} u serijalu'
+
+[note]
+  other = 'Napomena'
+
+[tip]
+  other = 'Savjet'
+
+[important]
+  other = 'Važno'
+
+[warning]
+  other = 'Upozorenje'
+
+[caution]
+  other = 'Oprez'

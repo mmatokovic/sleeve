@@ -4,9 +4,6 @@
 [header]
   other = 'Hello, there!'
 
-[intro]
-  other = "I'm Mislav, and I like to write when I have free time."
-
 [home]
   other = 'Home'
 
@@ -24,9 +21,6 @@
 
 [backToTop]
   other = 'Back to top'
-
-[someRightsReserved]
-  other = 'Some rights reserved'
 
 [latestPosts]
   other = 'Latest posts'
@@ -112,3 +106,40 @@
 
 [contact_error]
   other = "There was an error sending the message."
+
+[toggleDarkMode]
+  other = 'Toggle dark mode'
+
+[poweredBy]
+  other = 'Powered by'
+
+[and]
+  other = 'and'
+
+[readingTime]
+  one = '{{ .Count }} min read'
+  other = '{{ .Count }} min read'
+
+[olderPost]
+  other = 'Older post'
+
+[newerPost]
+  other = 'Newer post'
+
+[partOfSeries]
+  other = 'Part {{ .Part }} of {{ .Total }} in the series'
+
+[note]
+  other = 'Note'
+
+[tip]
+  other = 'Tip'
+
+[important]
+  other = 'Important'
+
+[warning]
+  other = 'Warning'
+
+[caution]
+  other = 'Caution'

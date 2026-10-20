@@ -5,6 +5,6 @@
 <h{{ $level }} id="{{ .Anchor }}" class="{{ $class }}">
   {{- .Text }}
   {{- if $showAnchor }}
-  <a href="#{{ .Anchor }}" class="not-prose absolute top-0 -left-6 w-6 no-underline opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100" aria-label="{{ T "linkToSection" }}">#</a>
+  <a href="#{{ .Anchor }}" class="not-prose absolute top-0 -left-6 w-6 no-underline opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100 after:content-['#']" aria-label="{{ T "linkToSection" }}"></a>
   {{- end -}}
 </h{{ $level }}>

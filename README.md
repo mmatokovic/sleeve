@@ -1,94 +1,193 @@
-# Sleeve - Hugo Theme
+# Sleeve
 
-`Sleeve` is a minimalist and responsive theme for [Hugo](https://gohugo.io/), designed to create fast, clean, and aesthetically pleasing websites. Whether you're building a personal blog, a portfolio, or a simple project site, Sleeve offers the flexibility and features you need.
+A minimal, fast and accessible blog theme for [Hugo](https://gohugo.io/), built with Tailwind CSS v4.
+
+Live site: [misli.mmatokovic.dev](https://misli.mmatokovic.dev)
 
 ## Features
 
-- **Minimal Design**: Focus on content with a clean layout.
-- **Responsive**: Fully responsive and works seamlessly across devices.
-- **Customizable**: Easy to adjust styles and settings for your project.
-- **Fast Performance**: Optimized for speed and SEO.
-- **Simple Setup**: Just add the theme and start writing!
+- Light and dark mode that follows the system setting, with a toggle that remembers the visitor's choice
+- Multilingual: every theme string is translated (English and Croatian included)
+- Responsive WebP images with `srcset`, generated from page bundle images
+- Post cards with thumbnails, tags, series and reading time
+- Series navigation, previous/next links and related posts
+- Table of contents with the current section highlighted
+- GitHub-style alerts (`> [!NOTE]`), responsive tables and math rendered to MathML at build time
+- JSON-LD, Open Graph and Twitter cards, with the post thumbnail as the share image
+- Contact form for Netlify Forms or any form backend
+- Optional Alpine.js and Turbo for a mobile menu and instant page loads
+- Accessible: skip link, landmarks, labelled icons and keyboard-friendly navigation
+
+## Requirements
+
+- Hugo **0.161.0** or later
+- Node.js and npm (or pnpm), for the Tailwind CSS CLI
+- Go, if you install the theme as a Hugo Module
 
 ## Installation
 
-To install Sleeve as your default theme, first install this repository in the themes/ directory:
+### As a Hugo Module (recommended)
 
-```bash
-git clone https://github.com/mmatokovic/sleeve.git themes/sleeve
+```sh
+hugo mod init github.com/<you>/<your-site>
 ```
 
-Include the dependencies defined in package.hugo.json from modules and themes
-
-```bash
-hugo mod npm pack
-```
-
-Then install or update the all required dependencies.
-
-```bash
-pnpm i
-pnpm up
-```
-
-Add the theme directly to your site configuration file `hugo.toml`:
-
-```json
-theme: sleeve
-```
-
-Start web server
-
-```bash
-hugo server  -F -N -D
-```
-
-## Updating
-
-From the root of your site:
-
-```bash
-git submodule update --remote --merge
-```
-
-## Configuration
-
-Configurations parameters for the sites config file. All the "params" are optional.
+In `hugo.toml`:
 
 ```toml
-baseURL = 'https://example.org/'
-title = 'SiteTitle'
-theme = "sleeve"
-languageCode = 'hr'                 # Set your language code (only needed for none multilingual 
+[module]
+  [[module.imports]]
+    path = 'github.com/mmatokovic/sleeve'
+```
+
+Then fetch the theme and its npm packages:
+
+```sh
+hugo mod get github.com/mmatokovic/sleeve@latest
+hugo mod npm pack
+npm install
+```
+
+Update later with `hugo mod get -u github.com/mmatokovic/sleeve`.
+
+### As a Git submodule
+
+```sh
+git submodule add https://github.com/mmatokovic/sleeve.git themes/sleeve
+```
+
+Set `theme = 'sleeve'` in `hugo.toml`, then run `hugo mod npm pack` and `npm install`.
+
+## Required site configuration
+
+Hugo does not read `build` or `security` settings from a theme, so your site has to set them for the Tailwind CSS build:
+
+```toml
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    disableWatch = true
+    source = 'hugo_stats.json'
+    target = 'assets/notwatching/hugo_stats.json'
+
+[build]
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]]
+    source = 'assets/notwatching/hugo_stats\.json'
+    target = 'css'
+  [[build.cachebusters]]
+    source = 'layouts/.*'
+    target = 'css'
+
+[security]
+  [security.exec]
+    allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
+  [security.node.permissions]
+    allowAddons = ['tailwindcss']
+    allowWorker = ['tailwindcss']
+```
+
+Add `hugo_stats.json`, `node_modules/` and `resources/` to `.gitignore`.
+
+If you use pnpm, add `nodeLinker: hoisted` to `pnpm-workspace.yaml` so Hugo can find the Tailwind CLI.
+
+## Parameters
+
+All parameters are optional.
+
+```toml
+titleCaseStyle = 'firstupper'      # recommended for non-English sites
 
 [params]
-  description = ''                  # Set site description, used in meta tags and JSON-LD
-  icon = ''                         # Relative path to icon in json feed and JSON-LD, no leading 
-  alpine = true                     # Add AlpineJS, default false.
+  description = 'Shown in search results and link previews'
+  intro = 'One line under the home page heading. Markdown allowed.'
+  alpine = true                    # mobile menu and back-to-top button
+  turbo = true                     # instant page navigation
+  darkMode = true                  # set to false to remove the toggle
+  favicon = 'favicon.ico'          # paths relative to static/
+  appleTouchIcon = 'apple-touch-icon.png'
+  manifest = 'site.webmanifest'
+  logo = 'images/logo.png'         # used in JSON-LD
   [params.author]
-    name = 'example'                # Your Name
-    email = 'example@mail.com'      # Your Email
-  [params.gallery]
-    shuffle     = false
-    reverse     = true
-    enable_exif = false
-```
-At a minimum you need to set the first four, title, description, image and category name. Read more in the podcast section below.
-
-## Uses
-
-When you wanna create a new content, Hugo evaluates the template actions within the archetype. For example:
-
-```bash
-hugo new content posts/my-first-post.md
+    name = 'Jane Doe'
+    email = 'jane@example.org'
+  [params.license]
+    name = 'CC BY 4.0'
+    url = 'https://creativecommons.org/licenses/by/4.0/'
+  [params.contact]
+    provider = 'netlify'           # adds Netlify Forms attributes
+    action = ''                    # or a form backend URL, e.g. Formspree
 ```
 
-Use the --kind command line flag to specify an alternate archetype when creating content: `hugo new content --kind tutorials articles/something.md`
+On a multilingual site, put `description` and `intro` under `[languages.<code>.params]`.
 
-## [License](https://choosealicense.com/licenses/mit/)
+### Taxonomies
 
-[MIT license](LICENSE) © 2024 Mislav Matoković
+The theme uses `tags` and `series`, and `genres` for book reviews:
 
-## Author Information
+```toml
+[taxonomies]
+  tag = 'tags'
+  series = 'series'
+  genre = 'genres'
+```
 
-[Mislav Matoković](https://github.com/mmatokovic)
+### Math
+
+Fenced ` ```math ` blocks work out of the box. For `\( … \)` and `$$ … $$` in text, enable the passthrough extension:
+
+```toml
+[markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [['\[', '\]'], ['$$', '$$']]
+    inline = [['\(', '\)']]
+```
+
+## Front matter
+
+```toml
++++
+title = 'My post'
+date = 2026-01-10T09:00:00Z
+tags = ['guide']
+series = 'Getting started'
+thumbnail = 'cover.jpg'            # an image in the page bundle
+description = 'Optional summary for search results'
++++
+```
+
+Pages with `type = 'miscellaneous'` (for example About and Contact) use a simple full-width layout.
+
+## Shortcodes
+
+| Shortcode | Example |
+| --- | --- |
+| `contact` | `{{< contact >}}` |
+| `details` | `{{< details title="More" closed="true" >}}…{{< /details >}}` |
+| `img` | `{{< img "photo.jpg" "resize 800x webp" >}}Caption{{< /img >}}` |
+| `audio` | `{{< audio src="talk.mp3" caption="A talk" >}}` |
+| `file` | `{{< file "document.pdf" "Document title" >}}` |
+| `icon` | `{{< icon "github" >}}` |
+
+## Customising
+
+- **Strings:** add `i18n/<lang>.toml` to your site with the keys you want to change.
+- **Hooks:** override `layouts/_partials/hooks/head-end.html` or `layouts/_partials/hooks/body-end.html` in your site to add scripts or tags.
+- **Any template:** copy it from the theme into the same path in your site's `layouts/`.
+
+## Example site
+
+```sh
+cd exampleSite
+hugo mod npm pack
+npm install
+hugo server
+```
+
+## License
+
+[MIT](LICENSE) © Mislav Matoković

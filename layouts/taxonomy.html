@@ -1,33 +1,33 @@
 {{ define "main" }}
 <div>
-  <nav class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 pb-4 text-gray-900" aria-label="{{ .Title }}">
+  <nav class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 pb-4 text-gray-900 dark:text-gray-100" aria-label="{{ .Title }}">
     {{- range .Data.Terms.ByCount }}
-    <a href="#{{ .Page.LinkTitle | anchorize }}" class="shrink-0 rounded-lg bg-gray-200 p-2 text-sm font-medium text-gray-600 transition hover:bg-gray-300">
+    <a href="#{{ .Page.LinkTitle | anchorize }}" class="shrink-0 rounded-lg bg-gray-200 dark:bg-gray-700 p-2 text-sm font-medium text-gray-600 dark:text-gray-400 transition hover:bg-gray-300 dark:hover:bg-gray-600">
       #{{ .Page.LinkTitle }}<sup class="pl-2">{{ .Count }}</sup>
     </a>
     {{- end }}
   </nav>
-  <div class="mx-auto max-w-7xl text-gray-900">
+  <div class="mx-auto max-w-7xl text-gray-900 dark:text-gray-100">
     {{- range .Data.Terms.Alphabetical }}
     <section aria-labelledby="{{ .Page.LinkTitle | anchorize }}">
       <div class="flex items-center justify-between gap-6 py-4">
-        <h2 id="{{ .Page.LinkTitle | anchorize }}" class="scroll-mt-4 text-xl font-bold text-gray-900 sm:text-3xl">
-          <a href="{{ .Page.RelPermalink }}" class="transition hover:text-gray-900/75 hover:underline">#{{ .Page.LinkTitle }}</a>
+        <h2 id="{{ .Page.LinkTitle | anchorize }}" class="scroll-mt-4 text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
+          <a href="{{ .Page.RelPermalink }}" class="transition hover:text-gray-900/75 dark:hover:text-gray-100/75 hover:underline">#{{ .Page.LinkTitle }}</a>
         </h2>
-        <span class="hidden h-px flex-1 bg-linear-to-l from-gray-500 to-transparent opacity-75 md:block" aria-hidden="true"></span>
-        <a href="#main" class="hidden px-6 font-bold text-gray-700 transition hover:text-gray-700/75 md:block">{{ T "backToTop" }}</a>
+        <span class="hidden h-px flex-1 bg-linear-to-l from-gray-500 dark:from-gray-400 to-transparent opacity-75 md:block" aria-hidden="true"></span>
+        <a href="#main" class="hidden px-6 font-bold text-gray-700 dark:text-gray-300 transition hover:text-gray-700/75 dark:hover:text-gray-300/75 md:block">{{ T "backToTop" }}</a>
       </div>
-      <ul class="divide-y divide-gray-900/10">
+      <ul class="divide-y divide-gray-900/10 dark:divide-white/10">
         {{- range .Pages.ByDate }}
         <li>
           <article class="py-6">
-            <h3 class="py-2 font-medium text-gray-900 sm:text-lg">
-              <a href="{{ .RelPermalink }}" class="transition hover:text-gray-900/75 hover:underline">{{ .Title }}</a>
+            <h3 class="py-2 font-medium text-gray-900 dark:text-gray-100 sm:text-lg">
+              <a href="{{ .RelPermalink }}" class="transition hover:text-gray-900/75 dark:hover:text-gray-100/75 hover:underline">{{ .Title }}</a>
             </h3>
-            <p class="line-clamp-2 text-sm text-gray-500">
+            <p class="line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
               {{ .Summary | plainify | htmlUnescape | truncate 142 }}
             </p>
-            <div class="mt-2 flex items-center gap-1 text-xs text-gray-500">
+            <div class="mt-2 flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
               <span class="uppercase">{{ .Section | title }}</span>
               <span aria-hidden="true">/</span>
               {{ partial "dates" . }}

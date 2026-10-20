@@ -1,11 +1,17 @@
-{{- $input := "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs" }}
-{{- $label := "block text-sm font-medium text-gray-700" }}
+{{- $input := "mt-1 w-full rounded-md border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-gray-700 dark:text-gray-300 shadow-xs" }}
+{{- $label := "block text-sm font-medium text-gray-700 dark:text-gray-300" }}
 <section data-turbo-temporary class="not-prose">
   <div class="rounded-lg p-8 shadow-lg lg:p-12">
-    <p class="contact-submitted mb-6 hidden rounded-md bg-green-50 p-4 text-green-800" role="status">{{ T "contact_submitted" }}</p>
-    <p class="contact-error mb-6 hidden rounded-md bg-red-50 p-4 text-red-800" role="alert">{{ T "contact_error" }}</p>
-    <form name="contact-form" id="contact-form" data-turbo="false" data-netlify="true" netlify-honeypot="bot-field" method="post" accept-charset="UTF-8" class="grid grid-cols-6 gap-6">
+    <p class="contact-submitted mb-6 hidden rounded-md bg-green-50 dark:bg-green-950 p-4 text-green-800 dark:text-green-200" role="status">{{ T "contact_submitted" }}</p>
+    <p class="contact-error mb-6 hidden rounded-md bg-red-50 dark:bg-red-950 p-4 text-red-800 dark:text-red-200" role="alert">{{ T "contact_error" }}</p>
+    {{- $contact := site.Params.contact }}
+    {{- $netlify := eq $contact.provider "netlify" }}
+    <form name="contact-form" id="contact-form" data-turbo="false" method="post" accept-charset="UTF-8" class="grid grid-cols-6 gap-6"
+      {{- with $contact.action }} action="{{ . }}"{{ end }}
+      {{- if $netlify }} data-netlify="true" netlify-honeypot="bot-field"{{ end }}>
+      {{- if $netlify }}
       <input type="hidden" name="form-name" value="contact-form">
+      {{- end }}
       <p class="hidden" aria-hidden="true">
         <label>Don’t fill this out: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
       </p>
@@ -26,8 +32,8 @@
         <textarea id="contact-message" name="message" required rows="8" class="{{ $input }} field-sizing-content min-h-40 p-3"></textarea>
       </div>
       <div class="col-span-6 flex items-center">
-        <input type="checkbox" id="contact-marketing" name="marketing_accept" value="yes" class="size-5 rounded-md border-gray-200 bg-white text-red-500 shadow-xs">
-        <label for="contact-marketing" class="ms-2 text-sm text-gray-700">{{ T "contactMarketing" }}</label>
+        <input type="checkbox" id="contact-marketing" name="marketing_accept" value="yes" class="size-5 rounded-md border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-red-500 shadow-xs">
+        <label for="contact-marketing" class="ms-2 text-sm text-gray-700 dark:text-gray-300">{{ T "contactMarketing" }}</label>
       </div>
       <div class="col-span-6">
         <button type="submit" disabled class="inline-block w-full cursor-pointer rounded-lg bg-blue-600 px-5 py-3 font-medium text-blue-50 shadow-md ring ring-blue-600 inset-shadow-sm inset-shadow-white/20 inset-ring inset-ring-white/15 hover:bg-blue-600/75 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">

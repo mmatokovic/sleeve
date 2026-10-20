@@ -2,7 +2,7 @@
   {{- with resources.Get "data/social.yaml" }}
     {{- range . | transform.Unmarshal }}
   <li>
-    <a href="{{ .url }}" rel="me noopener noreferrer" target="_blank" class="text-gray-700 transition hover:text-gray-700/75">
+    <a href="{{ .url }}" rel="me noopener noreferrer" target="_blank" class="text-gray-700 dark:text-gray-300 transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
       <span class="sr-only">{{ .name }}</span>
       {{ partial "utils/icon" (dict "name" .name "attributes" "height=20") }}
     </a>
@@ -11,7 +11,7 @@
   {{- end }}
   {{- with site.Home.OutputFormats.Get "rss" }}
   <li>
-    <a href="{{ .RelPermalink }}" class="text-gray-700 transition hover:text-gray-700/75">
+    <a href="{{ .RelPermalink }}" class="text-gray-700 dark:text-gray-300 transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
       <span class="sr-only">RSS</span>
       {{ partial "utils/icon" (dict "name" "rss" "attributes" "height=20") }}
     </a>

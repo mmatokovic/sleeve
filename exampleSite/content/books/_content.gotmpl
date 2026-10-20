@@ -1,48 +1,38 @@
-{{ $data := dict }}
+{{ $data := slice }}
 {{ $url := "https://gohugo.io/shared/examples/data/books.json" }}
-{{ with resources.GetRemote $url }}
+{{ with try (resources.GetRemote $url) }}
   {{ with .Err }}
-    {{ errorf "Unable to get remote resource %s: %s" $url . }}
-  {{ else }}
+    {{ warnf "Skipping the books demo: unable to get %s: %s" $url . }}
+  {{ else with .Value }}
     {{ $data = . | transform.Unmarshal }}
   {{ end }}
-{{ else }}
-  {{ errorf "Unable to get remote resource %s" $url }}
 {{ end }}
 
 {{ range $data }}
-
   {{ $content := dict "mediaType" "text/markdown" "value" .summary }}
   {{ $dates := dict "date" (time.AsTime .date) }}
-  {{ $params := dict "author" .author "isbn" .isbn "rating" .rating "tags" .tags }}
-  {{ $page := dict
+  {{ $params := dict "author" .author "isbn" .isbn "rating" .rating "genres" .genres }}
+  {{ $.AddPage (dict
     "content" $content
     "dates" $dates
     "kind" "page"
     "params" $params
     "path" .title
     "title" .title
-  }}
-  {{ $.AddPage $page }}
+  ) }}
 
   {{ $item := . }}
-  {{ with $url := $item.cover }}
-    {{ with resources.GetRemote $url }}
+  {{ with $item.cover }}
+    {{ with try (resources.GetRemote .) }}
       {{ with .Err }}
-        {{ errorf "Unable to get remote resource %s: %s" $url . }}
-      {{ else }}
-        {{ $content := dict "mediaType" .MediaType.Type "value" .Content }}
-        {{ $params := dict "alt" $item.title }}
-        {{ $resource := dict
-          "content" $content
-          "params" $params
+        {{ warnf "Skipping the cover of %q: %s" $item.title . }}
+      {{ else with .Value }}
+        {{ $.AddResource (dict
+          "content" (dict "mediaType" .MediaType.Type "value" .Content)
+          "params" (dict "alt" $item.title)
           "path" (printf "%s/cover.%s" $item.title .MediaType.SubType)
-        }}
-        {{ $.AddResource $resource }}
+        ) }}
       {{ end }}
-    {{ else }}
-      {{ errorf "Unable to get remote resource %s" $url }}
     {{ end }}
   {{ end }}
-
 {{ end }}

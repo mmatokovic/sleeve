@@ -4,7 +4,7 @@
       {{- with $i.Process . }}
         {{- $caption := $.Inner | default $spec }}
         {{- $alt := $.Get 2 | default ($.Inner | plainify) }}
-        <figure class="my-8 bg-gray-200/80 p-1">
+        <figure class="my-8 bg-gray-200/80 dark:bg-gray-700/80 p-1">
           <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $alt }}" loading="lazy" decoding="async" class="h-auto w-auto max-w-full">
           <figcaption><small>{{ $caption }}</small></figcaption>
         </figure>

@@ -4,7 +4,7 @@
 
 {{- with index site.Menus $menuID }}
   <nav class="px-4 py-6" aria-label="{{ $label }}">
-    <ul class="space-y-1 text-gray-500">
+    <ul class="space-y-1 text-gray-500 dark:text-gray-400">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
   </nav>
@@ -13,7 +13,7 @@
 {{- define "_partials/inline/menu/walk.html" }}
   {{- $page := .page }}
   {{- range .menuEntries }}
-    {{- $class := "block rounded-lg px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-700" }}
+    {{- $class := "block rounded-lg px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200" }}
     {{- $current := "" }}
     {{- if $page.IsMenuCurrent .Menu . }}
       {{- $current = "page" }}
@@ -21,7 +21,7 @@
       {{- $current = "true" }}
     {{- end }}
     {{- if $current }}
-      {{- $class = printf "%s bg-gray-100 text-gray-700" $class }}
+      {{- $class = printf "%s bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300" $class }}
     {{- end }}
     {{- $name := .Name }}
     {{- with .Identifier }}
@@ -31,7 +31,7 @@
       <a href="{{ .URL }}" class="{{ $class }}"{{ with $current }} aria-current="{{ . }}"{{ end }}>{{ $name }}</a>
       {{- with .Children }}
       <details class="group">
-        <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+        <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200">
           <span class="text-sm font-medium">{{ $name }}</span>
           <span class="shrink-0 transition duration-300 group-open:-rotate-180">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
