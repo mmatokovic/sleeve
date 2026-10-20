@@ -1,4 +1,3 @@
-{{/* Get remote data. */}}
 {{ $data := dict }}
 {{ $url := "https://gohugo.io/shared/examples/data/books.json" }}
 {{ with resources.GetRemote $url }}
@@ -11,10 +10,8 @@
   {{ errorf "Unable to get remote resource %s" $url }}
 {{ end }}
 
-{{/* Add pages and page resources. */}}
 {{ range $data }}
 
-  {{/* Add page. */}}
   {{ $content := dict "mediaType" "text/markdown" "value" .summary }}
   {{ $dates := dict "date" (time.AsTime .date) }}
   {{ $params := dict "author" .author "isbn" .isbn "rating" .rating "tags" .tags }}
@@ -28,7 +25,6 @@
   }}
   {{ $.AddPage $page }}
 
-  {{/* Add page resource. */}}
   {{ $item := . }}
   {{ with $url := $item.cover }}
     {{ with resources.GetRemote $url }}

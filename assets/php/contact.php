@@ -1,41 +1,32 @@
 <?php
 
-// Set the e-mail address that submission should be sent to e.g. info@example.com.
 $address = 'me@mmatokovic.dev';
 
-// Set the e-mail subject prefix.
 $prefix = 'Website feedback';
 
-// DO NOT EDIT ANYTHING BELOW UNLESS YOU KNOW WHAT YOU ARE DOING.
 
 $error = false;
 $success = false;
 
-// Check that the submission address is valid.
 if ((bool) filter_var(trim($address), FILTER_VALIDATE_EMAIL)) {
-  // Also set sender/return path header to this address to avoid SPF errors.
   $to = $sender = trim($address);
 }
 else {
   $error = true;
 }
 
-// Check that referer is local server.
 if (!isset($_SERVER['HTTP_REFERER']) || (parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) != $_SERVER['SERVER_NAME'])) {
   exit('Direct access not permitted');
 }
 
-// Check that this is a post request.
 if ($_SERVER['REQUEST_METHOD'] != 'POST' || empty($_POST)) {
   $error = true;
 }
 
-// Check if fake url field is filled in, i.e. spam bot.
 if (!empty($_POST['url'])) {
   $error = true;
 }
 
-// Check that e-mail address is valid.
 if ((bool) filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
   $email = trim($_POST['email']);
 }
@@ -44,7 +35,6 @@ else {
 }
 
 if (!$error) {
-  // Construct the mail with headers.
   $name = _contact_clean_str($_POST['name'], ENT_QUOTES, true, true);
   $prefix = _contact_clean_str($prefix, ENT_NOQUOTES, true, true);
   $subject = _contact_clean_str($_POST['subject'], ENT_NOQUOTES, true, true);
@@ -68,14 +58,12 @@ if (!$error) {
   }
   $mail_headers = join("\n", $mime_headers);
 
-  // Send the mail, suppressing errors and setting Return-Path with the "-f" option.
   $success = @mail($to, $subject, $message, $mail_headers, '-f' . $sender);
 }
 
 $status = $success ? 'submitted' : 'error';
 $contact_form_url = strtok($_SERVER['HTTP_REFERER'], '?');
 
-// Redirect back to contact form with status.
 header('Location: ' . $contact_form_url . '?' . $status, TRUE, 302);
 exit;
 

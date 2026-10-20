@@ -1,8 +1,3 @@
-/**
- * @file
- * A JavaScript file for responsive tables.
- */
-
 (function () {
 
   'use strict';

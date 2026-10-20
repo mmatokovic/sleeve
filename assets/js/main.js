@@ -1,8 +1,3 @@
-/**
- * @file
- * A JavaScript file for the theme. Runs first, before other things have loaded.
- */
-
 (function () {
 
   'use strict';

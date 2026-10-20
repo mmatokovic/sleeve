@@ -1,5 +1,3 @@
-{{/* Shortcode to include a PDF file in a page. */}}
-
 {{- $path := .Get 0 -}}
 {{- $title := .Get 1 | default (path.Base $path) -}}
 {{- $url := partial "utils/file-path" (dict "page" .Page "path" $path) -}}
