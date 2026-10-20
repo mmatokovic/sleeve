@@ -4,6 +4,109 @@
 [header]
   other = 'Hello, there!'
 
+[intro]
+  other = "I'm Mislav, and I like to write when I have free time."
+
+[home]
+  other = 'Home'
+
+[menu]
+  other = 'Menu'
+
+[mainNavigation]
+  other = 'Main navigation'
+
+[breadcrumb]
+  other = 'Breadcrumb'
+
+[skipToContent]
+  other = 'Skip to content'
+
+[backToTop]
+  other = 'Back to top'
+
+[someRightsReserved]
+  other = 'Some rights reserved'
+
+[latestPosts]
+  other = 'Latest posts'
+
+[readMore]
+  other = 'Read more'
+
+[postedOn]
+  other = 'Posted on'
+
+[updatedOn]
+  other = 'Updated on'
+
+[series]
+  other = 'Series'
+
+[related]
+  other = 'Related pages'
+
+[onThisPage]
+  other = 'On this page'
+
+[shareByEmail]
+  other = 'Share by email'
+
+[shareBody]
+  other = 'Check out this article from'
+
+[linkToSection]
+  other = 'Link to this section'
+
+[opensInNewTab]
+  other = 'opens in a new tab'
+
+[pagination]
+  other = 'Pagination'
+
+[first]
+  other = 'First'
+
+[prev]
+  other = 'Prev'
+
+[next]
+  other = 'Next'
+
+[last]
+  other = 'Last'
+
+[notFound]
+  other = 'Not found'
+
+[backHome]
+  other = 'Back to the home page'
+
+[genres]
+  other = 'Genres'
+
+[reviews]
+  one = '{{ . }} review'
+  other = '{{ . }} reviews'
+
+[contactEmail]
+  other = 'Email'
+
+[contactPhone]
+  other = 'Phone number'
+
+[contactName]
+  other = 'Name'
+
+[contactMessage]
+  other = 'Message'
+
+[contactMarketing]
+  other = 'I want to receive emails about announcements.'
+
+[contactSend]
+  other = 'Send enquiry'
+
 [contact_submitted]
   other = "Your message was sent."
 

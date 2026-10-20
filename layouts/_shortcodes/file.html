@@ -1,9 +1,10 @@
 {{/* Shortcode to include a PDF file in a page. */}}
 
 {{- $path := .Get 0 -}}
+{{- $title := .Get 1 | default (path.Base $path) -}}
 {{- $url := partial "utils/file-path" (dict "page" .Page "path" $path) -}}
 
-
-<div class="pdf">
-  <iframe src="{{ $url | safeURL }}" width="100%" style="min-height: 32rem;" frameborder="0"></iframe>
+<div class="pdf not-prose">
+  <iframe src="{{ $url | safeURL }}" title="{{ $title }}" loading="lazy" class="min-h-[32rem] w-full border-0"></iframe>
+  <p class="mt-2 text-sm"><a href="{{ $url | safeURL }}" class="underline">{{ $title }}</a></p>
 </div>

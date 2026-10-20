@@ -4,5 +4,112 @@
 [header]
   other = 'Pozdrav!'
 
+[intro]
+  other = 'Ja sam Mislav i volim pisati kad imam slobodnog vremena.'
+
+[home]
+  other = 'Početna'
+
+[menu]
+  other = 'Izbornik'
+
+[mainNavigation]
+  other = 'Glavna navigacija'
+
+[breadcrumb]
+  other = 'Putanja'
+
+[skipToContent]
+  other = 'Preskoči na sadržaj'
+
+[backToTop]
+  other = 'Natrag na vrh'
+
+[someRightsReserved]
+  other = 'Neka prava pridržana'
+
+[latestPosts]
+  other = 'Najnoviji članci'
+
+[readMore]
+  other = 'Pročitaj više'
+
+[postedOn]
+  other = 'Objavljeno'
+
+[updatedOn]
+  other = 'Ažurirano'
+
+[series]
+  other = 'Serijal'
+
 [related]
-  other = 'Related pages'
+  other = 'Povezani članci'
+
+[onThisPage]
+  other = 'Na ovoj stranici'
+
+[shareByEmail]
+  other = 'Podijeli e-poštom'
+
+[shareBody]
+  other = 'Pogledaj ovaj članak sa stranice'
+
+[linkToSection]
+  other = 'Poveznica na ovaj odjeljak'
+
+[opensInNewTab]
+  other = 'otvara se u novoj kartici'
+
+[pagination]
+  other = 'Stranice'
+
+[first]
+  other = 'Prva'
+
+[prev]
+  other = 'Prethodna'
+
+[next]
+  other = 'Sljedeća'
+
+[last]
+  other = 'Zadnja'
+
+[notFound]
+  other = 'Stranica nije pronađena'
+
+[backHome]
+  other = 'Natrag na početnu'
+
+[genres]
+  other = 'Žanrovi'
+
+[reviews]
+  one = '{{ . }} recenzija'
+  few = '{{ . }} recenzije'
+  other = '{{ . }} recenzija'
+
+[contactEmail]
+  other = 'E-pošta'
+
+[contactPhone]
+  other = 'Broj telefona'
+
+[contactName]
+  other = 'Ime'
+
+[contactMessage]
+  other = 'Poruka'
+
+[contactMarketing]
+  other = 'Želim primati obavijesti e-poštom.'
+
+[contactSend]
+  other = 'Pošalji upit'
+
+[contact_submitted]
+  other = 'Vaša poruka je poslana.'
+
+[contact_error]
+  other = 'Došlo je do pogreške pri slanju poruke.'

@@ -1,6 +1,7 @@
-{{ .Page.Store.Set "math" true -}}
-<p{{ with .Attributes.class }} class="{{ . }}"{{ end }}>
-$$
-{{ .Inner }}
-$$
-</p>
+{{- with try (transform.ToMath .Inner (dict "displayMode" true)) }}
+  {{- with .Err }}
+    {{- errorf "Unable to render math in %s: %s" $.Position . }}
+  {{- else }}
+<div{{ with $.Attributes.class }} class="{{ . }}"{{ end }}>{{ .Value }}</div>
+  {{- end }}
+{{- end }}

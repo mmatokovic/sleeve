@@ -1,30 +1,32 @@
 {{ define "main" }}
 <div>
-  <div class="mb-2.5">
+  <div class="mb-2.5 space-y-1">
     {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
     {{ partial "dates" . }}
     {{ partial "terms" (dict "taxonomy" "series" "page" .) }}
   </div>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-    <div class="lg:col-span-2">
-      <article class="prose lg:prose-xl max-w-none prose-img:mx-auto text-pretty">
+    <div class="min-w-0 lg:col-span-2">
+      <article class="prose max-w-none text-pretty lg:prose-xl prose-img:mx-auto">
         {{ .Content }}
       </article>
       {{ partial "related" . }}
     </div>
-    <div class="relative hidden md:block">
-      <aside class="sticky top-4">
-        <div class="flex items-center gap-4 mb-2">
-          <a class="text-gray-700 transition hover:text-gray-700/75" href="mailto:?subject={{ .Site.Title }}: {{ .Title }} &amp;body=Check out this latest article from {{ .Site.Title }}: {{ .RelPermalink }}">
-            {{ partial "utils/icon" (dict "name" "send" "attributes" "height=24") }}
-          </a>
-        </div>
-        <div>
-          <strong class="uppercase font-medium text-gray-300" x-data="{ visibleHeadingId: '' }"> ON THIS PAGE </strong>
-          {{ .TableOfContents }}
-        </div>
-      </aside>
-    </div>
+    <aside class="hidden lg:block">
+      <div class="sticky top-4">
+        {{- $subject := printf "%s: %s" site.Title .Title }}
+        {{- $body := printf "%s %s: %s" (T "shareBody") site.Title .Permalink }}
+        {{- $mailto := printf "mailto:?subject=%s&body=%s" (replace ($subject | urlquery) "+" "%20") (replace ($body | urlquery) "+" "%20") }}
+        <a href="{{ $mailto | safeURL }}" class="mb-2 inline-block text-gray-700 transition hover:text-gray-700/75">
+          <span class="sr-only">{{ T "shareByEmail" }}</span>
+          {{ partial "utils/icon" (dict "name" "send" "attributes" "height=24") }}
+        </a>
+        {{- if .Fragments.Identifiers }}
+        <h2 id="toc-heading" class="font-medium text-gray-500 uppercase">{{ T "onThisPage" }}</h2>
+        {{ replace .TableOfContents `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-labelledby="toc-heading">` | safeHTML }}
+        {{- end }}
+      </div>
+    </aside>
   </div>
 </div>
 {{ end }}

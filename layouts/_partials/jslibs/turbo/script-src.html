@@ -1,9 +1,6 @@
-{{- $opts := dict "minify" true }}
-{{- if eq hugo.Environment "development" }}
-  {{- $opts = merge $opts (dict "minify" false) }}
-{{- end }}
-
 {{- if site.Params.turbo }}
-{{- $turbo := resources.Get "js/libs/turbo/turbo.es2017-esm.js" | js.Build $opts | fingerprint }}
-<script type="module" src="{{ $turbo.RelPermalink }}" integrity="{{ $turbo.Data.Integrity }}"></script>
+{{- $opts := dict "minify" (not hugo.IsDevelopment) }}
+{{- with resources.Get "js/libs/turbo/turbo.es2017-esm.js" | js.Build $opts | fingerprint }}
+<script type="module" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
 {{- end }}

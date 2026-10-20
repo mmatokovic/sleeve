@@ -1,15 +1,13 @@
 {{ define "main" }}
-<main>
-  <article>
-    {{ with .Content }}
-    <div class="max-w-2xl px-6 mx-auto mt-6 prose">
-      {{- . -}}
-    </div>
-    {{ end }}
-    {{ partial "posts-template" . }}
-  </article>
-  <div class="max-w-xl mx-auto my-16">
+<div>
+  {{- with .Content }}
+  <div class="prose mx-auto mt-6 max-w-2xl px-6">
+    {{- . -}}
+  </div>
+  {{- end }}
+  {{ partial "posts-template" . }}
+  <div class="mx-auto my-16 max-w-xl">
     {{ partial "pagination" . }}
   </div>
-</main>
+</div>
 {{ end }}

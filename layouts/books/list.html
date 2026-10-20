@@ -3,21 +3,21 @@
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
     <div class="lg:col-span-2">
       <header>
-        <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">{{ len .Pages }} Reviews</h2>
+        <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">{{ T "reviews" (len .Pages) }}</h2>
       </header>
       <article>
         <div class="prose lg:prose-xl max-w-none text-pretty">
           {{- .Content -}}
         </div>
       </article>
-      <ul class="mt-8 grid gap-12 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-8 grid grid-cols-2 gap-12 lg:grid-cols-3">
         {{ range .Paginator.Pages }}
         <li>
           <a href="{{ .RelPermalink }}" class="group block overflow-hidden rounded-xs">
             {{ with .Resources.GetMatch "cover.*" }}
             <img
               src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}"
-              alt="{{ .Params.alt }}"
+              alt="{{ with .Params.alt }}{{ . }}{{ end }}" loading="lazy" decoding="async"
               class="h-[220px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[250px]"
             />
             {{ end }}
@@ -35,10 +35,10 @@
       </ul>
     </div>
     <div>
-      <aside class="hidden md:block top-4">
-        <strong class="uppercase font-medium text-gray-900"> Genres </strong>
+      <aside class="sticky top-4 hidden lg:block">
+        <h2 class="font-medium text-gray-900 uppercase">{{ T "genres" }}</h2>
         {{ $taxonomyObject := .Site.Taxonomies.genres }}
-        <nav class="py-8">
+        <nav class="py-8" aria-label="{{ T "genres" }}">
           <ul>
             {{ range $term, $weightedPages := $taxonomyObject }}
             <li>

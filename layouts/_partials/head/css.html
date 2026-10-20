@@ -1,24 +1,12 @@
 {{ with resources.Get "css/main.css" }}
-  {{ $opts := dict
-    "inlineImports" true
-    "optimize" (not hugo.IsDevelopment)
-  }}
-  {{ with . | css.PostCSS $opts }}
+  {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
+  {{ with . | css.TailwindCSS $opts }}
     {{ if hugo.IsDevelopment }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" />
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
     {{ else }}
-      {{ with . | minify | fingerprint }}
-        <link
-          rel="stylesheet"
-          href="{{ .RelPermalink }}"
-          integrity="{{ .Data.Integrity }}"
-          crossorigin="anonymous" />
+      {{ with . | fingerprint }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
       {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
-
-{{- if site.Params.gallery }}
-{{- $gallery := resources.Get "css/gallery.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $gallery.RelPermalink }}"></link>
-{{- end }}

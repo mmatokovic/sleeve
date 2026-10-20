@@ -1,59 +1,45 @@
-  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-    <div class="flex h-16 items-center justify-between">
-      <div class="flex-1 md:flex md:items-center md:gap-12">
-        <a class="block text-gray-600 transition hover:text-gray-600/75" href="{{ .Site.BaseURL | relLangURL }}">
-          <span class="sr-only">Home</span>
-					<span class="text-3xl">Ⰿ</span>
-        </a>
-      </div>
-      <div class="mr-4 md:mr-0">
-        {{- if hugo.IsMultilingual }}
-          {{- range .Site.Languages }}
-            {{- if eq . $.Site.Language }}
-            <a href="#" class="hidden capitalize text-gray-700 transition hover:text-gray-700/75">
-              {{ .LanguageName  }}
-            </a>
-            {{- else }}
-            {{- range $.Translations }}
-              <a href="{{ .RelPermalink }}" class="py-2.5 text-sm capitalize underline text-gray-700 transition hover:text-gray-700/75" title="{{ .Language.LanguageName }}">
-                {{ partial "utils/icon" (dict "name" "language" "attributes" "height=24") }}
-              </a>
-            {{- end }}
-            {{- end }}
-          {{- end }}
-        {{- end }}
-      </div>
-      <div class="md:flex md:items-center md:gap-12">
-        <div @click.away="open = false" x-data="{ open: false }"
-					class="block md:hidden">
-          <button @click="open = !open" 
-						class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path x-show="!open" 
-								stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              <path x-show="open" x-cloak d="M18 6 6 18"/><path x-show="open" x-cloak d="m6 6 12 12"/>
-            </svg>
-          </button>
-					<div x-show="open" x-cloak
-						class="absolute end-0 z-10 mt-0.5 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg" role="menu">
-						{{ partial "sidemenu" (dict "menuID" "main" "page" .) }}
-					</div>
-        </div>
-      </div>
+<div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+  <div class="flex h-16 items-center justify-between">
+    <div class="flex-1 md:flex md:items-center md:gap-12">
+      <a class="block text-gray-600 transition hover:text-gray-600/75" href="{{ site.Home.RelPermalink }}">
+        <span class="sr-only">{{ T "home" }}</span>
+        <span class="text-3xl" aria-hidden="true">Ⰿ</span>
+      </a>
     </div>
-    <div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
-      <div>
-        <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">{{ if not .IsHome }}{{ .Title }}{{ else }}{{ T "header" }}{{ end }}</h1>
-				<div class="mt-1.5 text-sm">
-					{{if not .IsHome}}
-						{{ partial "breadcrumbs" . }}
-					{{else}}
-					<p class="text-gray-500">
-						I'm Mislav, and I like to write when I have free time.
-					</p>
-					{{end}}
-				</div>
+    {{- if hugo.IsMultilingual }}
+    <div class="mr-4 lg:mr-0">
+      {{- range .Translations }}
+      <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Locale }}" title="{{ .Language.Label }}" class="block py-2.5 text-gray-700 transition hover:text-gray-700/75">
+        <span class="sr-only">{{ .Language.Label }}</span>
+        {{ partial "utils/icon" (dict "name" "language" "attributes" "height=24") }}
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+    <div class="relative lg:hidden" x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false">
+      <button type="button" @click="open = !open" :aria-expanded="open.toString()" aria-expanded="false" aria-controls="mobile-menu" class="cursor-pointer rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
+        <span class="sr-only">{{ T "menu" }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path x-show="!open" d="M4 6h16M4 12h16M4 18h16"/>
+          <path x-show="open" x-cloak d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <div id="mobile-menu" x-show="open" x-cloak class="absolute end-0 z-10 mt-0.5 w-56 rounded-md border border-gray-100 bg-white shadow-lg">
+        {{ partial "sidemenu" (dict "menuID" "main" "page" . "label" (T "menu")) }}
       </div>
-			{{ partial "social" . }}
     </div>
   </div>
+  <div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">{{ if .IsHome }}{{ T "header" }}{{ else }}{{ .Title }}{{ end }}</h1>
+      <div class="mt-1.5 text-sm">
+        {{- if .IsHome }}
+        <p class="text-gray-500">{{ T "intro" }}</p>
+        {{- else }}
+        {{ partial "breadcrumbs" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{ partial "social" . }}
+  </div>
+</div>

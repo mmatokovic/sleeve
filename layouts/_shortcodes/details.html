@@ -1,11 +1,11 @@
 {{- $title := .Get "title" | default "" -}}
-{{- $closed := eq (.Get "closed") "true" | default false -}}
+{{- $closed := eq (printf "%v" (.Get "closed")) "true" -}}
 
-<details class="last-of-type:mb-0 rounded-lg bg-neutral-50 p-2 mt-4 group" {{ if not $closed }}open{{ end }}>
-  <summary class="flex items-center cursor-pointer select-none list-none p-1 rounded transition-colors hover:bg-gray-100 before:mr-1 before:inline-block before:transition-transform before:content-[''] rtl:before:rotate-180 group-open:before:rotate-90">
-    <strong class="text-lg">{{ $title | markdownify }}</strong>
+<details class="group mt-4 rounded-lg bg-neutral-50 p-2 last-of-type:mb-0"{{ if not $closed }} open{{ end }}>
+  <summary class="flex cursor-pointer items-center rounded-sm p-1 transition-colors select-none before:mr-1 before:inline-block before:transition-transform before:content-['▸'] hover:bg-gray-100 group-open:before:rotate-90 rtl:before:rotate-180">
+    <strong class="text-lg">{{ $title | .Page.RenderString }}</strong>
   </summary>
-  <div class="p-2 overflow-hidden">
-    {{ .InnerDeindent | markdownify }}
+  <div class="overflow-hidden p-2">
+    {{ .InnerDeindent | .Page.RenderString (dict "display" "block") }}
   </div>
 </details>

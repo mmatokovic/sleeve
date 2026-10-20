@@ -8,16 +8,18 @@
   'use strict';
 
   const form = document.querySelector('#contact-form');
+  if (!form) {
+    return;
+  }
   const button = form.querySelector('[type=submit]');
   const action = form.getAttribute('data-protect');
 
   const activateForm = function () {
-    form.setAttribute('action', action);
+    if (action) {
+      form.setAttribute('action', action);
+    }
     button.removeAttribute('disabled');
   };
-
-  // Display the hidden form.
-  form.classList.remove('hidden');
 
   // Wait for a mouse to move, indicating they are human.
   document.body.addEventListener('mousemove', activateForm, {once: true});
@@ -30,20 +32,12 @@
     }
   }, {once: true});
 
-  // Mark the form as submitted.
-  button.addEventListener('click', () => form.classList.add('js-submitted'));
-
   // Display messages.
-  if (location.search.substring(1) !== '') {
-    switch (location.search.substring(1)) {
-      case 'submitted':
-        document.querySelector('.contact-submitted').classList.remove('hidden');
-        break;
-
-      case 'error':
-        document.querySelector('.contact-error').classList.remove('hidden');
-        break;
-    }
+  const status = new URLSearchParams(location.search);
+  if (status.has('submitted')) {
+    document.querySelector('.contact-submitted').classList.remove('hidden');
+  } else if (status.has('error')) {
+    document.querySelector('.contact-error').classList.remove('hidden');
   }
 
 })();

@@ -13,17 +13,11 @@ Renders the given image using the given process specification.
   {{- with $i := $.Page.Resources.Get . }}
     {{- with $spec := $.Get 1 }}
       {{- with $i.Process . }}
-        <figure style="padding: 0.25rem; margin: 2rem 0; background-color: #cccc">
-          <img style="max-width: 100%; width: auto; height: auto;" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="">
-          <figcaption>
-            <small>
-              {{- with $.Inner }}
-                {{ . }}
-              {{- else }}
-                {{ $spec }}
-              {{- end }}
-            </small>
-          </figcaption>
+        {{- $caption := $.Inner | default $spec }}
+        {{- $alt := $.Get 2 | default ($.Inner | plainify) }}
+        <figure class="my-8 bg-gray-200/80 p-1">
+          <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $alt }}" loading="lazy" decoding="async" class="h-auto w-auto max-w-full">
+          <figcaption><small>{{ $caption }}</small></figcaption>
         </figure>
       {{- end }}
     {{- else }}

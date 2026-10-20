@@ -7,37 +7,37 @@
 
   'use strict';
 
-  // Add a js class to the html-tag when JavsScript is active.
-  document.querySelector('html').classList.replace('nojs', 'js');
+  const offset = 10;
 
-  // Define offset value
-  var offset = 10;
+  const targetOf = function (link) {
+    const id = decodeURIComponent(link.getAttribute('href').slice(1));
+    return document.getElementById(id);
+  };
 
-  window.addEventListener('scroll', function() {
-      // Get the current vertical position of the scroll bar
-      var position = window.scrollY;
+  let ticking = false;
 
-      // Get all anchor elements in the TableOfContents
-      var links = document.querySelectorAll('#TableOfContents ul li a[href^="#"]');
+  const update = function () {
+    ticking = false;
+    const links = document.querySelectorAll('#TableOfContents a[href^="#"]');
+    let current = null;
 
-      links.forEach(function(link) {
-          var anchorId = link.getAttribute('href');
-          var targetElement = document.querySelector(anchorId);
+    links.forEach(function (link) {
+      const target = targetOf(link);
+      if (target && target.getBoundingClientRect().top - offset <= 0) {
+        current = link;
+      }
+    });
 
-          if (targetElement) {
-              var target = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+    links.forEach(function (link) {
+      link.classList.toggle('tocactive', link === current);
+    });
+  };
 
-              // Check if the document has crossed the page
-              //console.log(position, target);
-              if (position >= target) {
-                  // Remove active from all anchor elements and add it to the current anchor
-                  links.forEach(function(link) {
-                      link.classList.remove('tocactive');
-                  });
-                  link.classList.add('tocactive');
-              }
-          }
-      });
-  });
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+  }, {passive: true});
 
 })();

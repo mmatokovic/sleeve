@@ -1,14 +1,22 @@
-{{/* Render raw svg icon from .Site.Data */}}
-{{- $icon := index site.Data.icons .name -}}
+{{/* Render raw svg icon from hugo.Data */}}
+{{- $icon := index hugo.Data.icons .name -}}
 
 {{- if not $icon -}}
   {{ errorf "icon %q not found" .name }}
 {{- end -}}
 
-{{- $icon = $icon | safeHTML -}}
+{{- $attributes := .attributes | default "" -}}
+{{- $attributes = replaceRE `(\w[\w-]*)=([^"'\s]+)` `$1="$2"` $attributes -}}
 
-{{- if .attributes -}}
-  {{- $icon = replaceRE "<svg" (printf "<svg %s" .attributes) $icon -}}
+{{- $openTag := index (findRE `<svg[^>]*>` $icon 1) 0 -}}
+{{- $newTag := $openTag -}}
+{{- if findRE `\b(width|height)=` $attributes -}}
+  {{- $newTag = replaceRE `\s(width|height)="[^"]*"` "" $newTag -}}
 {{- end -}}
+{{- range findRESubmatch `([\w-]+)=` $attributes -}}
+  {{- $newTag = replaceRE (printf `\s%s="[^"]*"` (index . 1)) "" $newTag -}}
+{{- end -}}
+{{- $newTag = replaceRE `^<svg` (printf `<svg aria-hidden="true" focusable="false" %s` $attributes) $newTag -}}
+{{- $icon = replace $icon $openTag $newTag 1 -}}
 
 {{- return ($icon | safeHTML) -}}

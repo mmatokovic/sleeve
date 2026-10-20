@@ -1,13 +1,22 @@
-{{ $link := .Destination }}
-{{ $isRemote := or (strings.HasPrefix $link "http") (strings.HasSuffix $link ".pdf") }}
-{{- if not $isRemote -}}
-{{ $url := urls.Parse .Destination }}
-{{- if $url.Path -}}
-    {{ $fragment := "" }}
-    {{- with $url.Fragment }}{{ $fragment = printf "#%s" . }}{{ end -}}
-    {{- with .Page.GetPage $url.Path }}{{ $link = printf "%s%s" .RelPermalink $fragment }}{{ else }}{{ warnf "%q not found from %q" $url.Path $.Page.Path }}{{ end }}{{ end -}}
+{{- $u := urls.Parse .Destination }}
+{{- $href := .Destination }}
+{{- if and (not $u.IsAbs) $u.Path }}
+  {{- $fragment := "" }}
+  {{- with $u.Fragment }}{{ $fragment = printf "#%s" . }}{{ end }}
+  {{- with .PageInner.GetPage $u.Path }}
+    {{- $href = printf "%s%s" .RelPermalink $fragment }}
+  {{- else }}
+    {{- with or (.PageInner.Resources.Get $u.Path) (resources.Get $u.Path) }}
+      {{- $href = .RelPermalink }}
+    {{- else }}
+      {{- if not (fileExists (path.Join "static" $u.Path)) }}
+        {{- warnf "Link %q not found from %q" .Destination .Page.String }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
 {{- end -}}
-<a href="{{ $link | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if $isRemote }} target="_blank"{{ end }} class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-    {{ .Text | safeHTML }}
-    {{ if $isRemote }}{{ partial "utils/icon" (dict "name" "external-link" "attributes" "height=24") }}{{ end }}
+{{- $isHTTP := in (slice "http" "https") $u.Scheme -}}
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isHTTP }} target="_blank" rel="noopener noreferrer"{{ end }} class="font-medium text-blue-600 hover:underline">
+  {{- .Text }}
+  {{- if $isHTTP }}<span class="sr-only"> ({{ T "opensInNewTab" }})</span>{{ partial "utils/icon" (dict "name" "external-link" "attributes" `height="0.9em" class="ml-0.5 inline align-baseline"`) }}{{ end -}}
 </a>

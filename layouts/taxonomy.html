@@ -1,60 +1,43 @@
 {{ define "main" }}
-<section>
-  <div class="text-gray-900 mx-auto max-w-screen-xl">
-    <nav class="flex flex-wrap items-center justify-center gap-6 pb-4" aria-label="Tabs">
-    {{ range .Data.Terms.ByCount }}
-      <a href="#{{ .Page.LinkTitle }}" class="shrink-0 rounded-lg p-2 text-sm font-medium bg-gray-200 text-gray-600 transition hover:bg-gray-300">
-        #{{ .Page.LinkTitle }}<sup class="pl-2">{{ .Count }}</sup>
-      </a>
-    {{ end }}
-    </nav>
-  </div>
-  <div class="mx-auto text-gray-900 max-w-7xl">
-    <div class="not-prose">
-      {{ range .Data.Terms.Alphabetical }}
-      <header>
-        <div class="mx-auto max-w-screen-xl py-4">
-          <div class="flex items-center justify-between">
-            <div class="sm:flex sm:items-center">
-              <h1 class="text-xl font-bold sm:text-3xl text-gray-900 transition hover:text-gray-900/75" id="{{ .Page.LinkTitle }}">
-                <a href="{{ .Page.RelPermalink }}" class="relative hover:underline">#{{ .Page.LinkTitle }}</a>
-              </h1>
+<div>
+  <nav class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 pb-4 text-gray-900" aria-label="{{ .Title }}">
+    {{- range .Data.Terms.ByCount }}
+    <a href="#{{ .Page.LinkTitle | anchorize }}" class="shrink-0 rounded-lg bg-gray-200 p-2 text-sm font-medium text-gray-600 transition hover:bg-gray-300">
+      #{{ .Page.LinkTitle }}<sup class="pl-2">{{ .Count }}</sup>
+    </a>
+    {{- end }}
+  </nav>
+  <div class="mx-auto max-w-7xl text-gray-900">
+    {{- range .Data.Terms.Alphabetical }}
+    <section aria-labelledby="{{ .Page.LinkTitle | anchorize }}">
+      <div class="flex items-center justify-between gap-6 py-4">
+        <h2 id="{{ .Page.LinkTitle | anchorize }}" class="scroll-mt-4 text-xl font-bold text-gray-900 sm:text-3xl">
+          <a href="{{ .Page.RelPermalink }}" class="transition hover:text-gray-900/75 hover:underline">#{{ .Page.LinkTitle }}</a>
+        </h2>
+        <span class="hidden h-px flex-1 bg-linear-to-l from-gray-500 to-transparent opacity-75 md:block" aria-hidden="true"></span>
+        <a href="#main" class="hidden px-6 font-bold text-gray-700 transition hover:text-gray-700/75 md:block">{{ T "backToTop" }}</a>
+      </div>
+      <ul class="divide-y divide-gray-900/10">
+        {{- range .Pages.ByDate }}
+        <li>
+          <article class="py-6">
+            <h3 class="py-2 font-medium text-gray-900 sm:text-lg">
+              <a href="{{ .RelPermalink }}" class="transition hover:text-gray-900/75 hover:underline">{{ .Title }}</a>
+            </h3>
+            <p class="line-clamp-2 text-sm text-gray-500">
+              {{ .Summary | plainify | htmlUnescape | truncate 142 }}
+            </p>
+            <div class="mt-2 flex items-center gap-1 text-xs text-gray-500">
+              <span class="uppercase">{{ .Section | title }}</span>
+              <span aria-hidden="true">/</span>
+              {{ partial "dates" . }}
             </div>
-            <span class="hidden h-px md:block flex-1 bg-gradient-to-l from-gray-500 to-transparent opacity-75"></span>
-            <button x-data x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})" class="hidden md:block px-6 font-bold cursor-pointer text-gray-700 transition hover:text-gray-700/75">Return to top</button>
-          </div>
-        </div>
-      </header>
-      <section class="not-last:divide-y divide-gray-900/10">
-        {{- range .Pages.ByDate}}
-        <article class="bg-white">
-          <div class="flex items-start gap-4 py-6"> 
-            <div>
-              <h3 class="font-medium py-2 sm:text-lg text-gray-900 transition hover:text-gray-900/75">
-                <a href="{{ .RelPermalink }}" class="hover:underline"> 
-                  {{ .Title }} 
-                </a>
-              </h3>
-              <div class="line-clamp-2 text-sm text-gray-500">
-                {{ .Content | strings.Truncate 142 }}
-              </div>
-              <div class="mt-2 sm:flex sm:items-center sm:gap-2">
-                <div class="flex items-center gap-1 text-xs text-gray-500">
-                  <p class="uppercase">
-                    {{ .Section | title }}
-                  </p>/
-                  <p>
-                    {{ partial "dates" . }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
+          </article>
+        </li>
         {{- end }}
-      </section>
-      {{ end }}
-    </div>
+      </ul>
+    </section>
+    {{- end }}
   </div>
-</section>
+</div>
 {{ end }}

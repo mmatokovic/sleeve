@@ -32,7 +32,7 @@
 {{ end -}}
 
 <figure class="audio{{ with $class }} {{ . }}{{ end }}">
-<audio controls preload="{{ $preload }}">
+<audio controls preload="{{ $preload }}" class="w-full">
 <source src="{{ $src }}" {{ with $type }}type="{{ . }}"{{ end }}>
 </audio>
 {{ with $caption -}}

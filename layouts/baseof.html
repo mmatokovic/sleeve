@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
 <head>
   {{ partial "head" . }}
   {{ block "head-custom" . }}{{ end }}
 </head>
-<body>
+<body class="bg-white text-gray-900 antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:shadow-lg">{{ T "skipToContent" }}</a>
   <header>
     {{ partial "header" . }}
   </header>
-  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="relative mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[220px_1fr] lg:gap-8">
-      <div class="hidden md:block">
+      <div class="hidden lg:block">
         {{ partial "sidemenu" (dict "menuID" "main" "page" .) }}
       </div>
-      {{ block "main" . }}{{ end }}
+      <main id="main" class="min-w-0">
+        {{ block "main" . }}{{ end }}
+      </main>
     </div>
-  </main>
+  </div>
   <footer>
     {{ partial "footer" . }}
   </footer>

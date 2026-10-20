@@ -1,10 +1,9 @@
+{{- $quote := printf `<blockquote%s>%s</blockquote>` (cond (isset .Attributes "cite") (printf ` cite="%s"` (.Attributes.cite | htmlEscape)) "") .Text }}
+{{- with .Attributes.caption }}
 <figure>
-  <blockquote {{ with .Attributes.cite }}cite="{{ . }}"{{ end }}>
-    {{ .Text }}
-    {{ with .Attributes.caption }}
-      <figcaption class="">
-        {{ . | safeHTML }}
-      </figcaption>
-    {{ end }}
-  </blockquote>
+  {{ $quote | safeHTML }}
+  <figcaption class="text-sm text-gray-500">{{ . | safeHTML }}</figcaption>
 </figure>
+{{- else }}
+{{ $quote | safeHTML }}
+{{- end }}

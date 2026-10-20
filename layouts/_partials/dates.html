@@ -1,6 +1,8 @@
-{{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-{{ $dateHuman := .Date | time.Format "Jan 2 '06" | strings.FirstUpper}}
-{{ $lastModHuman := .Lastmod | time.Format "Jan 2 '06" | strings.FirstUpper }}
+{{- $format := "Jan 2 '06" }}
+{{- $rfc3339 := "2006-01-02T15:04:05Z07:00" }}
 <small class="text-xs text-gray-500">
-  <time datetime="{{ $dateMachine }}">Posted on {{ $dateHuman }} • Updated on {{ $lastModHuman }}</time>
+  {{ T "postedOn" }} <time datetime="{{ .Date.Format $rfc3339 }}">{{ .Date | time.Format $format | strings.FirstUpper }}</time>
+  {{- if and .Lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+  • {{ T "updatedOn" }} <time datetime="{{ .Lastmod.Format $rfc3339 }}">{{ .Lastmod | time.Format $format | strings.FirstUpper }}</time>
+  {{- end }}
 </small>

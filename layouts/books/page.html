@@ -5,7 +5,7 @@
       {{ with .Resources.GetMatch "cover.*" }}
       <div class="max-w-lg md:max-w-none">
         <img
-          src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ .Params.alt }}"
+          src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ with .Params.alt }}{{ . }}{{ end }}" fetchpriority="high"
           class="rounded-lg mx-auto"
         />
       </div>
@@ -17,7 +17,7 @@
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
             <dt class="font-medium text-gray-900">Title</dt>
             <dd class="text-gray-700 sm:col-span-2">{{ .Title }}</dd>
-          </div>   
+          </div>
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
             <dt class="font-medium text-gray-900">Author</dt>
             <dd class="text-gray-700 sm:col-span-2">{{ .Params.author }}</dd>
@@ -36,14 +36,9 @@
           </div>
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
             <dt class="font-medium text-gray-900">Genres</dt>
-            <dd class="text-gray-700 sm:col-span-2">
-              {{- $taxonomyObject := .Site.Taxonomies.genres }}
-              {{- with $taxonomyObject }}
-              <p class="text-xs text-gray-500">
-                {{- range $term, $weightedPages := $taxonomyObject }}
-                <a href="{{ .Page.RelPermalink }}" class="font-medium underline hover:text-gray-700">{{ .Page.LinkTitle }}</a>
-                {{- end }}
-              </p>
+            <dd class="flex flex-wrap gap-2 text-xs text-gray-500 sm:col-span-2">
+              {{- range .GetTerms "genres" }}
+              <a href="{{ .RelPermalink }}" class="font-medium underline hover:text-gray-700">{{ .LinkTitle }}</a>
               {{- end }}
             </dd>
           </div>

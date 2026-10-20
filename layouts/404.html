@@ -1,7 +1,6 @@
 {{ define "main" }}
-<section>
-  <div class="grid place-content-center bg-white px-4">
-    <h1 class="uppercase tracking-widest text-gray-700">404 | Not Found</h1>
-  </div>
+<section class="grid place-content-center gap-4 px-4 text-center">
+  <h2 class="tracking-widest text-gray-700 uppercase">404 | {{ T "notFound" }}</h2>
+  <a href="{{ site.Home.RelPermalink }}" class="text-gray-700 underline transition hover:text-gray-700/75">{{ T "backHome" }}</a>
 </section>
 {{ end }}

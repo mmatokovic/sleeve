@@ -1,12 +1,11 @@
-{{- $opts := dict "minify" true }}
-{{- if eq hugo.Environment "development" }}
-  {{- $opts = merge $opts (dict "minify" false) }}
+{{- $opts := dict "minify" (not hugo.IsDevelopment) }}
+
+{{- with resources.Get "js/main.js" | js.Build $opts | fingerprint }}
+<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
 {{- end }}
 
-{{- $main := resources.Get "js/main.js" | js.Build $opts | fingerprint }}
-<script src="{{ $main.RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
-
 {{- if .HasShortcode "contact" }}
-{{- $contact := resources.Get "js/contact.js" | js.Build $opts | fingerprint }}
-<script defer src="{{ $contact.RelPermalink }}"></script>
+{{- with resources.Get "js/contact.js" | js.Build $opts | fingerprint }}
+<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
 {{- end }}

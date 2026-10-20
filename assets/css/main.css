@@ -1,15 +1,14 @@
 @import "tailwindcss";
-@plugin '@tailwindcss/typography';
-@plugin '@tailwindcss/forms';
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+@source "hugo_stats.json";
+
+@source inline("tocactive");
 
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;
-  }
-  /* Improve Page speed */
-  /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
-  img {
-    content-visibility: auto;
   }
   details > summary {
     list-style: none;
@@ -17,37 +16,27 @@
   details > summary::-webkit-details-marker {
     display: none;
   }
-  body.overflow {
-    overflow: hidden;
+  [x-cloak] {
+    display: none !important;
   }
-  [x-cloak] { display: none !important; }
 }
 
 @layer components {
   #TableOfContents {
     @apply py-8;
-  
+
     ul > li > ul {
       @apply space-y-1 border-l border-gray-200 pl-4;
     }
-  
+
     a {
       @apply text-gray-500 hover:text-gray-700;
     }
   }
-  
+
   .tocactive {
     @apply font-medium text-gray-700;
   }
-
-  .active {
-    @apply text-gray-700 bg-gray-100;
-  }
-}
-
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
 }
 
 @theme {
@@ -57,8 +46,4 @@
   --color-sun-burnt: oklch(0.62 0.22 33);
   --color-basalt: oklch(0.56 0.03 310);
   --color-mulberry: oklch(0.43 0.07 15);
-
-  --inset-shadow-2xs: inset 0 1px rgb(0 0 0 / 0.05);
-  --inset-shadow-xs: inset 0 1px 1px rgb(0 0 0 / 0.05);
-  --inset-shadow-sm: inset 0 2px 4px rgb(0 0 0 / 0.05);
 }

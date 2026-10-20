@@ -1,13 +1,13 @@
 {{ define "main" }}
-<main>
-  <article>
-    <div class="prose lg:prose-xl max-w-none text-pretty">
-      {{- .Content -}}
-    </div>
-    {{ partial "posts-template" . }}
-  </article>
-  <div class=" my-16">
+<div>
+  {{- with .Content }}
+  <div class="prose max-w-none text-pretty lg:prose-xl">
+    {{- . -}}
+  </div>
+  {{- end }}
+  {{ partial "posts-template" . }}
+  <div class="my-16">
     {{ partial "pagination" . }}
   </div>
-</main>
+</div>
 {{ end }}
