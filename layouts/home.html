@@ -1,20 +1,24 @@
 {{ define "main" }}
 <section aria-labelledby="latest-posts">
-  <h2 id="latest-posts" class="flex justify-end font-medium text-gray-900 dark:text-gray-100 uppercase">{{ T "latestPosts" }}</h2>
+  <h2 id="latest-posts" class="mb-6 flex justify-end font-medium text-gray-900 dark:text-gray-100 uppercase">{{ T "latestPosts" }}</h2>
   {{- range $i, $_ := first 3 (where site.RegularPages "Type" "posts") }}
   {{- $post := . }}
-  <article class="group mb-3 flex min-h-48">
+  <article class="group mb-3 flex gap-3 sm:min-h-48 sm:gap-0">
     {{- $thumb := "" }}
     {{- with .Params.thumbnail }}{{ $thumb = $post.Resources.Get . }}{{ end }}
     {{- with $thumb }}
-    <a href="{{ $post.RelPermalink }}" data-turbo="false" tabindex="-1" aria-hidden="true" class="hidden sm:block sm:basis-56 sm:shrink-0">
+    <a href="{{ $post.RelPermalink }}" data-turbo="false" tabindex="-1" aria-hidden="true" class="block shrink-0 self-start pt-1 sm:basis-56 sm:self-stretch sm:pt-0">
+      {{- $mobile := .Process "fill 112x80 webp" }}
+      {{- $mobile2x := .Process "fill 224x160 webp" }}
+      {{- $small := .Process "fill 224x192 webp" }}
       {{- with .Process "fill 448x384 webp" }}
       <picture>
-        <source media="(min-width: 640px)" srcset="{{ .RelPermalink }}">
+        <source media="(min-width: 640px)" srcset="{{ $small.RelPermalink }} 1x, {{ .RelPermalink }} 2x" width="{{ $small.Width }}" height="{{ $small.Height }}">
         <img
-          src="data:,"
-          width="{{ .Width }}"
-          height="{{ .Height }}"
+          src="{{ $mobile.RelPermalink }}"
+          srcset="{{ $mobile.RelPermalink }} 1x, {{ $mobile2x.RelPermalink }} 2x"
+          width="{{ $mobile.Width }}"
+          height="{{ $mobile.Height }}"
           alt=""
           {{- if eq $i 0 }}
           fetchpriority="high"
@@ -22,24 +26,26 @@
           loading="lazy"
           {{- end }}
           decoding="async"
-          class="h-full w-full rounded-lg object-cover transition group-hover:grayscale-50"
+          class="h-20 w-28 rounded-lg object-cover transition group-hover:grayscale-50 sm:h-full sm:w-full"
         >
       </picture>
       {{- end }}
     </a>
     {{- end }}
     <div class="flex min-w-0 flex-1 flex-col md:pl-4">
-      <div class="flex flex-1 flex-col border-s border-gray-900/10 dark:border-white/10 p-1 sm:border-s-transparent sm:p-2">
+      <div class="flex flex-1 flex-col p-1 sm:p-2{{ if $thumb }} sm:border-s sm:border-s-transparent{{ else }} border-s border-gray-900/10 dark:border-white/10 sm:border-s-transparent{{ end }}">
         {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
-        {{ partial "dates" . }}
+        <div class="max-sm:hidden">
+          {{ partial "dates" . }}
+        </div>
         <h3 class="border-b-2 border-gray-100 dark:border-gray-800 pt-2 font-medium text-gray-900 dark:text-gray-100 uppercase hover:text-gray-900/75 dark:hover:text-gray-100/75">
           <a href="{{ .RelPermalink }}" data-turbo="false">{{ .Title }}</a>
         </h3>
-        <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700 dark:text-gray-300">
+        <p class="mt-2 line-clamp-3 text-sm/relaxed max-sm:hidden text-gray-700 dark:text-gray-300">
           {{ .Summary | plainify | htmlUnescape | truncate 300 }}
         </p>
         {{- if .Truncated }}
-        <a href="{{ .RelPermalink }}" data-turbo="false" class="mt-auto self-start text-xs font-bold text-gray-700 dark:text-gray-300 uppercase transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
+        <a href="{{ .RelPermalink }}" data-turbo="false" class="mt-auto self-start text-xs font-bold max-sm:hidden text-gray-700 dark:text-gray-300 uppercase transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
           {{ T "readMore" }}<span class="sr-only">: {{ .Title }}</span>
         </a>
         {{- end }}

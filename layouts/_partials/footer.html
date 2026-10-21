@@ -1,6 +1,11 @@
 <div class="mx-auto max-w-7xl space-y-8 px-4 py-16 text-center sm:px-6 lg:space-y-16 lg:px-8">
   <p>
-    &copy; {{ now.Year }} {{ with site.Params.author.name }}{{ . }}{{ end }}
+    &copy; {{ now.Year }}
+    {{- with site.Params.copyright }}
+    <a href="{{ .url }}" rel="me noopener" target="_blank" class="text-gray-700 dark:text-gray-300 underline transition hover:text-gray-700/75 dark:hover:text-gray-300/75">{{ .name }}</a>
+    {{- else }}
+    {{ with site.Params.author.name }}{{ . }}{{ end }}
+    {{- end }}
     {{- with site.Params.license }}
     · <a href="{{ .url }}" rel="license noopener" target="_blank" class="text-gray-700 dark:text-gray-300 underline transition hover:text-gray-700/75 dark:hover:text-gray-300/75">{{ .name }}</a>
     {{- end }}

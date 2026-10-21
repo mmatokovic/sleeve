@@ -116,6 +116,9 @@ titleCaseStyle = 'firstupper'      # recommended for non-English sites
   [params.author]
     name = 'Jane Doe'
     email = 'jane@example.org'
+  [params.copyright]               # optional footer link, defaults to the author name
+    name = 'janedoe'
+    url = 'https://github.com/janedoe'
   [params.license]
     name = 'CC BY 4.0'
     url = 'https://creativecommons.org/licenses/by/4.0/'
