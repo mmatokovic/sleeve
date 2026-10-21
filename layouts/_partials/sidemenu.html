@@ -1,9 +1,10 @@
 {{- $page := .page }}
 {{- $menuID := .menuID }}
 {{- $label := .label | default (T "mainNavigation") }}
+{{- $class := .class }}
 
 {{- with index site.Menus $menuID }}
-  <nav class="px-4 py-6" aria-label="{{ $label }}">
+  <nav{{ with $class }} class="{{ . }}"{{ end }} aria-label="{{ $label }}">
     <ul class="space-y-1 text-gray-500 dark:text-gray-400">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
