@@ -10,6 +10,7 @@ Live site: [misli.mmatokovic.dev](https://misli.mmatokovic.dev)
 - Multilingual: every theme string is translated (English and Croatian included)
 - Responsive WebP images with `srcset`, generated from page bundle images
 - Post cards with thumbnails, tags, series and reading time
+- Post search on list pages that covers every page of the list and ignores case and diacritics
 - Series navigation, previous/next links and related posts
 - Table of contents with the current section highlighted
 - GitHub-style alerts (`> [!NOTE]`), responsive tables and math rendered to MathML at build time

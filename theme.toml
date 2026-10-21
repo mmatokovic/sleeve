@@ -6,7 +6,7 @@ homepage = 'https://github.com/mmatokovic/sleeve'
 demosite = 'https://misli.mmatokovic.dev'
 min_version = '0.161.0'
 tags = ['blog', 'tailwindcss', 'responsive', 'multilingual', 'dark', 'personal', 'minimal', 'accessible']
-features = ['responsive', 'dark mode', 'multilingual', 'json-ld', 'open graph', 'responsive images', 'table of contents', 'series', 'math', 'alerts', 'contact form']
+features = ['responsive', 'dark mode', 'multilingual', 'json-ld', 'open graph', 'responsive images', 'table of contents', 'search', 'series', 'math', 'alerts', 'contact form']
 
 [author]
   name = 'Mislav Matoković'
