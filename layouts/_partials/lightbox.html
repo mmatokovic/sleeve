@@ -1,0 +1,23 @@
+{{- $button := "absolute rounded-full p-2 text-gray-200 transition hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-white" }}
+<dialog id="lightbox" aria-label="{{ T "imageViewer" }}" class="fixed inset-0 m-0 size-full max-h-none max-w-none flex-col items-center justify-center overscroll-contain bg-black/90 p-0 text-white backdrop:bg-transparent open:flex">
+  <button type="button" data-lightbox-close class="{{ $button }} top-3 right-3 z-10">
+    <span class="sr-only">{{ T "closeImage" }}</span>
+    {{ partial "utils/icon" (dict "name" "close" "attributes" "height=28 width=28") }}
+  </button>
+  <p data-lightbox-count class="absolute top-5 left-5 text-sm text-gray-300 tabular-nums"></p>
+  <figure class="m-0 flex max-w-full flex-col items-center gap-3 px-4">
+    <div data-lightbox-stage class="grid max-w-full overflow-hidden rounded-lg">
+      <img data-lightbox-thumb alt="" class="col-start-1 row-start-1 size-full scale-110 object-contain blur-xl">
+      <img data-lightbox-full alt="" class="relative col-start-1 row-start-1 size-full object-contain opacity-0 transition-opacity duration-300 data-loaded:opacity-100">
+    </div>
+    <figcaption data-lightbox-caption class="max-w-prose text-center text-sm text-gray-300"></figcaption>
+  </figure>
+  <button type="button" data-lightbox-prev class="{{ $button }} top-1/2 left-2 -translate-y-1/2 max-sm:hidden">
+    <span class="sr-only">{{ T "previousImage" }}</span>
+    {{ partial "utils/icon" (dict "name" "chevron-left" "attributes" "height=36 width=36") }}
+  </button>
+  <button type="button" data-lightbox-next class="{{ $button }} top-1/2 right-2 -translate-y-1/2 max-sm:hidden">
+    <span class="sr-only">{{ T "nextImage" }}</span>
+    {{ partial "utils/icon" (dict "name" "chevron-right" "attributes" "height=36 width=36") }}
+  </button>
+</dialog>

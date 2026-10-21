@@ -9,6 +9,7 @@ Live site: [misli.mmatokovic.dev](https://misli.mmatokovic.dev)
 - Light and dark mode that follows the system setting, with a toggle that remembers the visitor's choice
 - Multilingual: every theme string is translated (English and Croatian included)
 - Responsive WebP images with `srcset`, generated from page bundle images
+- Standalone images get a tiny blurred placeholder and open in a lightbox with keyboard, swipe and previous/next navigation
 - Post cards with thumbnails, tags, series and reading time
 - Post search on list pages that covers every page of the list and ignores case and diacritics
 - Series navigation, previous/next links and related posts

@@ -23,6 +23,7 @@
   <footer>
     {{ partial "footer" . }}
   </footer>
+  {{ if .Store.Get "lightbox" }}{{ partial "lightbox" . }}{{ end }}
   {{ partial "consent-banner" . }}
   {{ partial "hooks/body-end.html" . }}
 </body>

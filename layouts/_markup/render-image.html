@@ -9,11 +9,14 @@
 {{- end }}
 
 {{- $attrs := dict "alt" .PlainText "loading" "lazy" "decoding" "async" }}
+{{- $full := $src }}
+{{- $box := dict }}
+{{- $style := "" }}
 {{- with $img }}
   {{- if in (slice "image/jpeg" "image/png" "image/webp") .MediaType.Type }}
     {{- $srcset := slice }}
     {{- $largest := . }}
-    {{- range slice 480 800 1200 }}
+    {{- range slice 480 800 1200 1600 }}
       {{- if le . $img.Width }}
         {{- $largest = $img.Resize (printf "%dx webp" .) }}
         {{- $srcset = $srcset | append (printf "%s %dw" $largest.RelPermalink .) }}
@@ -24,25 +27,48 @@
       {{- $srcset = slice (printf "%s %dw" $largest.RelPermalink $img.Width) }}
     {{- end }}
     {{- $src = $largest.RelPermalink }}
+    {{- $sizes := "(min-width: 1024px) 680px, calc(100vw - 2rem)" }}
+    {{- if lt $largest.Width 680 }}
+      {{- $sizes = printf "(min-width: 1024px) %dpx, min(%dpx, calc(100vw - 2rem))" $largest.Width $largest.Width }}
+    {{- end }}
     {{- $attrs = merge $attrs (dict
       "srcset" (delimit $srcset ", ")
-      "sizes" "(min-width: 1024px) 680px, calc(100vw - 2rem)"
+      "sizes" $sizes
       "width" $largest.Width
       "height" $largest.Height
     ) }}
+    {{- $zoom := $img }}
+    {{- if gt $img.Width 2400 }}
+      {{- $zoom = $img.Resize "2400x webp" }}
+    {{- else }}
+      {{- $zoom = $img.Resize (printf "%dx webp" $img.Width) }}
+    {{- end }}
+    {{- $full = $zoom.RelPermalink }}
+    {{- $tiny := $img.Resize "20x webp q50" }}
+    {{- $lqip := printf "data:%s;base64,%s" $tiny.MediaType.Type ($tiny.Content | base64Encode) }}
+    {{- $box = dict "width" $zoom.Width "height" $zoom.Height }}
+    {{- $style = printf "background: %s url(%s) center / cover no-repeat" (index $tiny.Colors 0) $lqip }}
   {{- else }}
     {{- $src = .RelPermalink }}
+    {{- $full = $src }}
   {{- end }}
 {{- end }}
 {{- $attrs = merge $attrs (dict "src" $src) }}
+{{- with $style }}
+  {{- $attrs = merge $attrs (dict "style" .) }}
+{{- end }}
 {{- $attrString := "" }}
 {{- range $k, $v := $attrs }}
   {{- $attrString = printf `%s %s="%s"` $attrString $k (string $v | htmlEscape) }}
 {{- end }}
 
 {{- if .IsBlock }}
+{{- .Page.Store.Set "lightbox" true }}
 <figure>
-  <img class="h-auto rounded-xl"{{ $attrString | safeHTMLAttr }}>
+  <a href="{{ $full }}" class="mx-auto block w-fit cursor-zoom-in" data-lightbox data-turbo="false" aria-label="{{ T "openImage" }}{{ with .PlainText }}: {{ . }}{{ end }}"
+    {{- with $box }} data-width="{{ .width }}" data-height="{{ .height }}"{{ end }}>
+    <img class="h-auto max-h-[70svh] w-auto rounded-xl"{{ $attrString | safeHTMLAttr }}>
+  </a>
   {{- with .Title }}
   <figcaption class="text-center"><small>{{ . }}</small></figcaption>
   {{- end }}

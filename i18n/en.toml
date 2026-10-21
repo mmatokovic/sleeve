@@ -161,3 +161,18 @@
 
 [noResults]
   other = 'No posts match your search.'
+
+[imageViewer]
+  other = 'Image viewer'
+
+[openImage]
+  other = 'Open image'
+
+[closeImage]
+  other = 'Close'
+
+[previousImage]
+  other = 'Previous image'
+
+[nextImage]
+  other = 'Next image'

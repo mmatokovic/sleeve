@@ -163,3 +163,18 @@
 
 [noResults]
   other = 'Nema članaka koji odgovaraju pretrazi.'
+
+[imageViewer]
+  other = 'Preglednik slika'
+
+[openImage]
+  other = 'Otvori sliku'
+
+[closeImage]
+  other = 'Zatvori'
+
+[previousImage]
+  other = 'Prethodna slika'
+
+[nextImage]
+  other = 'Sljedeća slika'

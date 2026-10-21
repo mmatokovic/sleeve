@@ -19,6 +19,9 @@
   html.dark {
     color-scheme: dark;
   }
+  html:has(#lightbox[open]) {
+    overflow: hidden;
+  }
   details > summary {
     list-style: none;
   }
