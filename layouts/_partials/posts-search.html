@@ -1,0 +1,33 @@
+<div data-search data-search-empty="{{ T "noResults" }}" hidden class="mt-8">
+  <div class="relative">
+    <label for="post-search" class="sr-only">{{ T "searchPosts" }}</label>
+    <input
+      id="post-search"
+      type="search"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="{{ T "searchPosts" }}…"
+      data-search-input
+      class="w-full rounded-lg border-gray-300 bg-white pe-10 text-sm text-gray-900 shadow-sm focus:border-gray-500 focus:ring-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+    >
+    <button type="button" data-search-clear hidden class="absolute inset-y-0 end-0 px-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+      <span class="sr-only">{{ T "clearSearch" }}</span>
+      <span aria-hidden="true">✕</span>
+    </button>
+  </div>
+  <p data-search-status role="status" class="mt-2 text-xs text-gray-500 dark:text-gray-400"></p>
+  <ul data-search-results hidden class="mt-4 divide-y divide-gray-900/10 dark:divide-white/10">
+    {{- range .Pages }}
+    {{- $terms := slice .LinkTitle (.Summary | plainify | htmlUnescape) }}
+    {{- range .GetTerms "tags" }}{{ $terms = $terms | append .LinkTitle }}{{ end }}
+    {{- range .GetTerms "series" }}{{ $terms = $terms | append .LinkTitle }}{{ end }}
+    <li data-search-text="{{ delimit $terms " " }}" class="py-3">
+      <a href="{{ .RelPermalink }}" class="font-medium text-gray-900 dark:text-gray-100 hover:text-gray-900/75 dark:hover:text-gray-100/75">{{ .LinkTitle }}</a>
+      <div class="mt-1 flex flex-wrap items-center gap-2">
+        {{ partial "dates" . }}
+        {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
+      </div>
+    </li>
+    {{- end }}
+  </ul>
+</div>

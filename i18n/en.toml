@@ -152,3 +152,12 @@
 
 [caution]
   other = 'Caution'
+
+[searchPosts]
+  other = 'Search posts'
+
+[clearSearch]
+  other = 'Clear search'
+
+[noResults]
+  other = 'No posts match your search.'

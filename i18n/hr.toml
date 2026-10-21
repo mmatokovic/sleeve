@@ -154,3 +154,12 @@
 
 [caution]
   other = 'Oprez'
+
+[searchPosts]
+  other = 'Pretraži članke'
+
+[clearSearch]
+  other = 'Očisti pretragu'
+
+[noResults]
+  other = 'Nema članaka koji odgovaraju pretrazi.'
