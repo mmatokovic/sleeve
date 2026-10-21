@@ -7,7 +7,7 @@
     {{- $thumb := "" }}
     {{- with .Params.thumbnail }}{{ $thumb = $post.Resources.Get . }}{{ end }}
     {{- with $thumb }}
-    <div class="hidden sm:block sm:basis-56 sm:shrink-0">
+    <a href="{{ $post.RelPermalink }}" data-turbo="false" tabindex="-1" aria-hidden="true" class="hidden sm:block sm:basis-56 sm:shrink-0">
       {{- with .Process "fill 448x384 webp" }}
       <picture>
         <source media="(min-width: 640px)" srcset="{{ .RelPermalink }}">
@@ -26,7 +26,7 @@
         >
       </picture>
       {{- end }}
-    </div>
+    </a>
     {{- end }}
     <div class="flex min-w-0 flex-1 flex-col md:pl-4">
       <div class="flex flex-1 flex-col border-s border-gray-900/10 dark:border-white/10 p-1 sm:border-s-transparent sm:p-2">
