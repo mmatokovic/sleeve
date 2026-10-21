@@ -1,5 +1,5 @@
 +++
-title = '{{ replace .File.ContentBaseName `-` ` ` | title }}s'
+title = '{{ replace .File.ContentBaseName `-` ` ` | title }}'
 date = {{ .Date }}
 draft = true
 categories = ['Technology', 'Lifestyle', 'Education', 'Travel', 'Finance', historical]
