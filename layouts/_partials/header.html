@@ -31,7 +31,7 @@
           <path x-show="open" x-cloak d="M18 6 6 18M6 6l12 12"/>
         </svg>
       </button>
-      <div id="mobile-menu" x-show="open" x-cloak class="absolute end-0 z-10 mt-0.5 w-56 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg">
+      <div id="mobile-menu" x-show="open" x-cloak class="absolute inset-e-0 z-10 mt-0.5 w-56 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg">
         {{ partial "sidemenu" (dict "menuID" "main" "page" . "label" (T "menu")) }}
       </div>
     </div>
