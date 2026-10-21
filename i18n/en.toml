@@ -126,8 +126,8 @@
   other = 'and'
 
 [readingTime]
-  one = '{{ .Count }} min read'
-  other = '{{ .Count }} min read'
+  one = '{{ .Count }} minute read'
+  other = '{{ .Count }} minute read'
 
 [olderPost]
   other = 'Older post'

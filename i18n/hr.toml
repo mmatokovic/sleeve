@@ -127,9 +127,9 @@
   other = 'i'
 
 [readingTime]
-  one = '{{ .Count }} min čitanja'
-  few = '{{ .Count }} min čitanja'
-  other = '{{ .Count }} min čitanja'
+  one = '{{ .Count }} minuta čitanja'
+  few = '{{ .Count }} minute čitanja'
+  other = '{{ .Count }} minuta čitanja'
 
 [olderPost]
   other = 'Stariji članak'
