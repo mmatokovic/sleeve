@@ -1,6 +1,6 @@
 {{ define "main" }}
 <section aria-labelledby="latest-posts">
-  <h2 id="latest-posts" class="mb-6 flex justify-end font-medium text-gray-900 dark:text-gray-100 uppercase">{{ T "latestPosts" }}</h2>
+  <h2 id="latest-posts" class="mb-6 flex font-medium text-gray-900 dark:text-gray-100 uppercase">{{ T "latestPosts" }}</h2>
   {{- range $i, $_ := first 3 (where site.RegularPages "Type" "posts") }}
   {{- $post := . }}
   <article class="group mb-3 flex gap-3 sm:min-h-48 sm:gap-0">
