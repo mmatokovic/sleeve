@@ -31,6 +31,9 @@
 {{- end }}
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)">
+{{- if site.Params.turbo }}
+<meta name="view-transition" content="same-origin">
+{{- end }}
 {{- range .AllTranslations }}
 <link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">
 {{- end }}
@@ -65,7 +68,6 @@
   {{ partial "head/css" . }}
 {{ end }}
 {{ partial "head/js" . }}
-{{ partialCached "jslibs/alpinejs/script-src" "-" }}
 {{ partialCached "jslibs/turbo/script-src" "-" }}
 {{- with site.Home.OutputFormats.Get "rss" }}
   {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}

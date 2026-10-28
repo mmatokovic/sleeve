@@ -28,12 +28,20 @@
   details > summary::-webkit-details-marker {
     display: none;
   }
-  [x-cloak] {
-    display: none !important;
-  }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 150ms;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none;
+    }
   }
 }
 

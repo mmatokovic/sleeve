@@ -9,6 +9,9 @@
 {{- end }}
 
 {{- $attrs := dict "alt" .PlainText "loading" "lazy" "decoding" "async" }}
+{{- if and .IsBlock (eq .Ordinal 0) }}
+  {{- $attrs = dict "alt" .PlainText "fetchpriority" "high" }}
+{{- end }}
 {{- $full := $src }}
 {{- $box := dict }}
 {{- $style := "" }}

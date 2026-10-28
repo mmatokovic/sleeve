@@ -8,7 +8,6 @@ enableRobotsTXT = true
 [params]
   description = 'A demo of the Sleeve theme for Hugo.'
   intro = 'A minimal, fast and accessible blog theme for Hugo.'
-  alpine = true
   turbo = true
   darkMode = true
   [params.author]

@@ -17,7 +17,7 @@ Live site: [misli.mmatokovic.dev](https://misli.mmatokovic.dev)
 - GitHub-style alerts (`> [!NOTE]`), responsive tables and math rendered to MathML at build time
 - JSON-LD, Open Graph and Twitter cards, with the post thumbnail as the share image
 - Contact form for Netlify Forms or any form backend
-- Optional Alpine.js and Turbo for a mobile menu and instant page loads
+- Optional Turbo for instant page loads
 - Accessible: skip link, landmarks, labelled icons and keyboard-friendly navigation
 
 ## Requirements
@@ -106,7 +106,6 @@ titleCaseStyle = 'firstupper'      # recommended for non-English sites
 [params]
   description = 'Shown in search results and link previews'
   intro = 'One line under the home page heading. Markdown allowed.'
-  alpine = true                    # mobile menu and back-to-top button
   turbo = true                     # instant page navigation
   darkMode = true                  # set to false to remove the toggle
   favicon = 'favicon.ico'          # paths relative to static/
