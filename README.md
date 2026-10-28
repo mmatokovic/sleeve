@@ -50,6 +50,8 @@ hugo mod npm pack
 npm install
 ```
 
+`hugo mod npm pack` copies the theme's npm packages from its `package.json` into `packages/hugoautogen/package.json` and adds that folder to your `package.json` as an npm workspace. Run it again after updating the theme.
+
 Update later with `hugo mod get -u github.com/mmatokovic/sleeve`.
 
 ### As a Git submodule
