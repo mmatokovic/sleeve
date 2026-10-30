@@ -1,0 +1,17 @@
+{{- $page := .page }}
+{{- $attributes := cond .compact "height=16 width=16" "height=24" }}
+{{- $link := cond .compact "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" "text-gray-700 dark:text-gray-300 hover:text-gray-700/75 dark:hover:text-gray-300/75" }}
+{{- $subject := printf "%s: %s" site.Title $page.Title }}
+{{- $body := printf "%s %s: %s" (T "shareBody") site.Title $page.Permalink }}
+{{- $mailto := printf "mailto:?subject=%s&body=%s" (replace ($subject | urlquery) "+" "%20") (replace ($body | urlquery) "+" "%20") }}
+<div class="{{ .class }} flex items-center {{ cond .compact "gap-2" "gap-3" }}">
+  <a href="{{ $mailto | safeURL }}" class="inline-flex {{ $link }} transition">
+    <span class="sr-only">{{ T "shareByEmail" }}</span>
+    {{ partial "utils/icon" (dict "name" "send" "attributes" $attributes) }}
+  </a>
+  <button type="button" data-share data-share-title="{{ $page.Title }}" data-share-url="{{ $page.Permalink }}" hidden class="inline-flex cursor-pointer {{ $link }} transition">
+    <span class="sr-only">{{ T "shareLink" }}</span>
+    {{ partial "utils/icon" (dict "name" "share" "attributes" $attributes) }}
+  </button>
+  <span data-share-status role="status" hidden class="{{ cond .compact "order-first text-xs" "text-sm" }} text-gray-500 dark:text-gray-400">{{ T "linkCopied" }}</span>
+</div>

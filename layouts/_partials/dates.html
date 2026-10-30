@@ -1,13 +1,16 @@
+{{- $page := . }}
+{{- $stacked := false }}
+{{- if reflect.IsMap . }}{{ $page = .page }}{{ $stacked = .stacked }}{{ end }}
 {{- $format := "Jan 2 '06" }}
 {{- $rfc3339 := "2006-01-02T15:04:05Z07:00" }}
-<small class="flex flex-wrap items-center gap-x-3 text-xs text-gray-500 dark:text-gray-400">
+<small class="flex text-xs text-gray-500 dark:text-gray-400 {{ cond $stacked "flex-col items-start gap-y-0.5 lg:flex-row lg:flex-wrap lg:items-center lg:gap-x-3 lg:gap-y-0" "flex-wrap items-center gap-x-3" }}">
   <span>
-    {{ T "postedOn" }} <time datetime="{{ .Date.Format $rfc3339 }}">{{ .Date | time.Format $format | strings.FirstUpper }}</time>
-    {{- if and .Lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
-    • {{ T "updatedOn" }} <time datetime="{{ .Lastmod.Format $rfc3339 }}">{{ .Lastmod | time.Format $format | strings.FirstUpper }}</time>
+    {{ T "postedOn" }} <time datetime="{{ $page.Date.Format $rfc3339 }}">{{ $page.Date | time.Format $format | strings.FirstUpper }}</time>
+    {{- if and $page.Lastmod (ne ($page.Lastmod.Format "2006-01-02") ($page.Date.Format "2006-01-02")) }}
+    • {{ T "updatedOn" }} <time datetime="{{ $page.Lastmod.Format $rfc3339 }}">{{ $page.Lastmod | time.Format $format | strings.FirstUpper }}</time>
     {{- end }}
   </span>
-  {{- if eq .Type "posts" }}
-  {{ partial "reading-time" . }}
+  {{- if eq $page.Type "posts" }}
+  {{ partial "reading-time" (cond $stacked (dict "page" $page "class" "lg:ms-auto") $page) }}
   {{- end }}
 </small>

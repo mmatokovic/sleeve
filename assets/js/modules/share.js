@@ -1,10 +1,12 @@
 const statusDuration = 2000;
 
 const reveal = function () {
-  const button = document.querySelector('[data-share]');
-  if (button && (navigator.share || navigator.clipboard)) {
-    button.hidden = false;
+  if (!navigator.share && !navigator.clipboard) {
+    return;
   }
+  document.querySelectorAll('[data-share]').forEach(function (button) {
+    button.hidden = false;
+  });
 };
 
 const copy = async function (button) {

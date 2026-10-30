@@ -2,7 +2,10 @@
 <div>
   <div class="mb-2.5 space-y-1">
     {{ partial "terms" (dict "taxonomy" "tags" "page" .) }}
-    {{ partial "dates" . }}
+    <div class="flex items-center gap-3">
+      <div class="min-w-0 flex-1">{{ partial "dates" (dict "page" . "stacked" true) }}</div>
+      {{ partial "share" (dict "page" . "class" "shrink-0 lg:hidden" "compact" true) }}
+    </div>
     {{ partial "series" . }}
   </div>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
@@ -15,20 +18,7 @@
     </div>
     <aside class="hidden lg:block">
       <div class="sticky top-4">
-        {{- $subject := printf "%s: %s" site.Title .Title }}
-        {{- $body := printf "%s %s: %s" (T "shareBody") site.Title .Permalink }}
-        {{- $mailto := printf "mailto:?subject=%s&body=%s" (replace ($subject | urlquery) "+" "%20") (replace ($body | urlquery) "+" "%20") }}
-        <div class="mb-2 flex items-center gap-3">
-          <a href="{{ $mailto | safeURL }}" class="inline-block text-gray-700 dark:text-gray-300 transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
-            <span class="sr-only">{{ T "shareByEmail" }}</span>
-            {{ partial "utils/icon" (dict "name" "send" "attributes" "height=24") }}
-          </a>
-          <button type="button" data-share data-share-title="{{ .Title }}" data-share-url="{{ .Permalink }}" hidden class="inline-block cursor-pointer text-gray-700 dark:text-gray-300 transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
-            <span class="sr-only">{{ T "shareLink" }}</span>
-            {{ partial "utils/icon" (dict "name" "share" "attributes" "height=24") }}
-          </button>
-          <span data-share-status role="status" hidden class="text-sm text-gray-500 dark:text-gray-400">{{ T "linkCopied" }}</span>
-        </div>
+        {{ partial "share" (dict "page" . "class" "mb-2") }}
         {{- if .Fragments.Identifiers }}
         <h2 id="toc-heading" class="font-medium text-gray-500 dark:text-gray-400 uppercase">{{ T "onThisPage" }}</h2>
         {{ replace .TableOfContents `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-labelledby="toc-heading">` | safeHTML }}

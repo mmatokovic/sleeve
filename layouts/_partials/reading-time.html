@@ -1,1 +1,4 @@
-<span class="ms-auto inline-flex items-center gap-1 whitespace-nowrap">{{ partial "utils/icon" (dict "name" "clock" "attributes" `height="14" width="14"`) }}{{ T "readingTime" (partial "utils/reading-time" .) }}</span>
+{{- $page := . }}
+{{- $class := "ms-auto" }}
+{{- if reflect.IsMap . }}{{ $page = .page }}{{ $class = .class }}{{ end -}}
+<span class="{{ $class }} inline-flex items-center gap-1 whitespace-nowrap">{{ partial "utils/icon" (dict "name" "clock" "attributes" `height="14" width="14"`) }}{{ T "readingTime" (partial "utils/reading-time" $page) }}</span>
