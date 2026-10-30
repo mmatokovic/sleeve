@@ -18,10 +18,17 @@
         {{- $subject := printf "%s: %s" site.Title .Title }}
         {{- $body := printf "%s %s: %s" (T "shareBody") site.Title .Permalink }}
         {{- $mailto := printf "mailto:?subject=%s&body=%s" (replace ($subject | urlquery) "+" "%20") (replace ($body | urlquery) "+" "%20") }}
-        <a href="{{ $mailto | safeURL }}" class="mb-2 inline-block text-gray-700 dark:text-gray-300 transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
-          <span class="sr-only">{{ T "shareByEmail" }}</span>
-          {{ partial "utils/icon" (dict "name" "send" "attributes" "height=24") }}
-        </a>
+        <div class="mb-2 flex items-center gap-3">
+          <a href="{{ $mailto | safeURL }}" class="inline-block text-gray-700 dark:text-gray-300 transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
+            <span class="sr-only">{{ T "shareByEmail" }}</span>
+            {{ partial "utils/icon" (dict "name" "send" "attributes" "height=24") }}
+          </a>
+          <button type="button" data-share data-share-title="{{ .Title }}" data-share-url="{{ .Permalink }}" hidden class="inline-block cursor-pointer text-gray-700 dark:text-gray-300 transition hover:text-gray-700/75 dark:hover:text-gray-300/75">
+            <span class="sr-only">{{ T "shareLink" }}</span>
+            {{ partial "utils/icon" (dict "name" "share" "attributes" "height=24") }}
+          </button>
+          <span data-share-status role="status" hidden class="text-sm text-gray-500 dark:text-gray-400">{{ T "linkCopied" }}</span>
+        </div>
         {{- if .Fragments.Identifiers }}
         <h2 id="toc-heading" class="font-medium text-gray-500 dark:text-gray-400 uppercase">{{ T "onThisPage" }}</h2>
         {{ replace .TableOfContents `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-labelledby="toc-heading">` | safeHTML }}

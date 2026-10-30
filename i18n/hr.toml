@@ -46,6 +46,12 @@
 [shareByEmail]
   other = 'Podijeli e-poštom'
 
+[shareLink]
+  other = 'Podijeli poveznicu'
+
+[linkCopied]
+  other = 'Poveznica je kopirana'
+
 [shareBody]
   other = 'Pogledaj ovaj članak sa stranice'
 

@@ -46,6 +46,12 @@
 [shareByEmail]
   other = 'Share by email'
 
+[shareLink]
+  other = 'Share link'
+
+[linkCopied]
+  other = 'Link copied'
+
 [shareBody]
   other = 'Check out this article from'
 
